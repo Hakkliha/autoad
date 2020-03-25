@@ -33,7 +33,7 @@ def current_today():
 def current_month():
 	month = datetime.date.today().month
 	if month < 10:
-		return f'0{month}'
+		return '0' + month
 	else:
 		return month
 
