@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="padding-left: 20px">
+	<h1>{{ object.brand }} {{ object.vehicle_model }} {{ object.vehicle_model_other }}</h1>
+	<h3>{{ object.body_type }}</h3>
+	<h5>{{ object.new_used }}</h5>
+	<p>Power: {{ object.power_kw }} kW</p>
+	<p>Year: {{ object.vehicle_model_year }}</p>
+	<p>Mileage: {{ object.mileage_km }} km</p>
+	{% if object.damaged is True %}
+	<p>Vehicle is damaged!</p>
+	{% endif %}
+	{% if object.accident is True %}
+	<p>Vehicle has had an accident!</p>
+	{% endif %}
+	<p>Fuel: {{ object.fuel }}</p>
+	{% if object.fuel == 'Electric' %}
+	<p>Battery Capacity: {{ object.fuel_tank_l }}</p>
+	<p>Electricity consumption (city): {{ object.fuel_usage_city }} kWh/100km</p>
+	<p>Electricity consumption (outside of city): {{ object.fuel_usage_out }} kWh/100km</p>
+	{% else %}
+	<p>Cylinders: {{ object.cylinders }}</p>
+	<p>Displacement(cm): {{ object.displacement_cm }}</p>
+	<p>Fuel tank size: {{ object.fuel_tank_l }}L</p>
+	<p>Fuel consumption (city): {{ object.fuel_usage_city }}L/100km</p>
+	<p>Fuel consumption (outside of city): {{ object.fuel_usage_out }}L/100km</p>
+	<p>Transmission: {{ object.transmission }}</p>
+{% endif %}
+<p><button><a href="./edit/">EDIT</a></button><button style="margin-left: 10px"><a href="./delete/">DELETE</a></button></p>
+</div>
+{% endblock %}

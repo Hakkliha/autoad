@@ -1,0 +1,14 @@
+.listitem {
+	margin: 20px 0 10px 20px;
+}
+
+#searchbar {
+	margin: 20px 0 10px 20px;
+	display: inline-flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#searchbar div {
+	margin-right: 10px;
+}

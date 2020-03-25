@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+	<title>Search</title>
+	{% load static %}
+
+	<link rel="stylesheet" type="text/css" href="{% static 'autoad/list_style.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<form method="GET">
+	<div id="searchbar">
+	<div>Vehicle make {{ filter.form.brand }}</div><div class="d-none">{{ filter.form.vehicle_model }}</div><div>Vehicle model <select id="vehicle_model"><option>Choose a model</option></select></div><div>Order by {{ filter.form.ordering }}</div>
+	<button type="submit" class="btn btn-primary">Search</button>
+	</div>
+</form>
+{% for instance in filter.qs %}
+	<div class="listitem">
+		<h2><a href='{{ instance.get_absolute_url }}'> {{ instance.brand }} {{ instance.vehicle_model }} {{ instance.vehicle_model_other }} {{ instance.vehicle_model_year }} - € {{ instance.price }}</a></h2>
+	</div>
+	<hr>
+{% endfor %}
+
+<script src="{% static 'autoad/create_function.js' %}" type="module"></script> 
+{% endblock %}
