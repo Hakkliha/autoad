@@ -28,24 +28,24 @@ class LoginView(View):
     def post(self, request, *args, **kwargs):
         form = LoginForm(request.POST)
         if form.is_valid():
-	        request = self.request
-	        next_ = request.GET.get('next')
-	        next_post = request.POST.get('next')
-	        redirect_path = next_ or next_post or None
-	        email = form.cleaned_data.get("email")
-	        password = form.cleaned_data.get("password")
-	        user = authenticate(request, username=email, password=password)
-	        if user is not None:
-	            login(request, user)
-	            try:
-	                del request.session['guest_email_id']
-	            except:
-	                pass
-	            if is_safe_url(redirect_path, request.get_host()):
-	                return redirect(redirect_path)
-	            else:
-	                return redirect("/")
-	        return super(LoginView, self).form_invalid(form)
+            request = self.request
+            next_ = request.GET.get('next')
+            next_post = request.POST.get('next')
+            redirect_path = next_ or next_post or None
+            email = form.cleaned_data.get("email")
+            password = form.cleaned_data.get("password")
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                login(request, user)
+                try:
+                    del request.session['guest_email_id']
+                except:
+                    pass
+                if is_safe_url(redirect_path, request.get_host()):
+                    return redirect(redirect_path)
+                else:
+                    return redirect("/")
+            return render(request, self.template_name, {'form': form})
 
 
 class RegisterView(CreateView):

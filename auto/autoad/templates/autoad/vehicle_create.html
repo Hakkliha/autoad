@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-	<form action="." method="POST" style="margin: 50px 0 0 0" class="create_form"> {% csrf_token %}
+	<form action="." method="POST" style="margin: 50px 0 0 0" class="create_form" enctype="multipart/form-data"> {% csrf_token %}
 		<div class="d-none">
 			<div class="inputfield">
 				<p>Vehicle type</p>

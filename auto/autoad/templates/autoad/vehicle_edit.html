@@ -1,0 +1,442 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	<title>Add vehicle</title>
+	{% load static %}
+
+	<link rel="stylesheet" type="text/css" href="{% static 'autoad/create_style.css' %}">
+
+{% endblock %}
+
+{% block content %}
+{% if request.user == object.user %}
+	<form action="." method="POST" style="margin: 50px 0 0 0" class="create_form"> {% csrf_token %}
+		<div class="d-none">
+			<div class="inputfield">
+				<p>Vehicle type</p>
+				<div>{{ form.vehicle_type }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Vehicle manufacturer</p>
+				<div>{{ form.brand }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Vehicle model</p>
+				<div class="d-none">{{ form.vehicle_model }}</div>
+				<select id="vehicle_model"><option>Choose a model</option></select>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Additional model info (Luxury, S-Line, R-Line etc.)</p>
+				<div>{{ form.vehicle_model_other }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Vehicle model year</p>
+				<div>{{ form.vehicle_model_year }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Body type</p>
+				<div>{{ form.body_type }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Pictures</p>
+				<div>{{ form.pictures }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<div>This vehicle is {{ form.new_used }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Price</p>
+				<div>{{ form.price }} €</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>VAT will be added {{ form.value_added_tax }}</p>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Warranty until</p>
+				<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+				 {{ form.warranty_until }}
+			
+				 	 <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+				    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+				  </div>
+				</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Insurance until</p>
+				<div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+				 {{ form.insurance_until }}
+			
+				  <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+				    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+				  </div>
+				</div>
+			</div>
+			<hr>
+		</div>
+		<div>	
+			<div class="inputfield">
+				<p>Valid MOT until</p>
+				<div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+				 {{ form.valid_mot_until }}
+			
+			  	<div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+				    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+				  </div>
+				</div>
+			</div>
+			<hr>
+			<div>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Service history book {{ form.service_history_bk }}</p>
+			</div>
+			<hr>
+			
+		</div>
+			<div>
+			<div class="inputfield">
+				<p>The Vehicle has been in an accident {{ form.accident }}</p>
+			</div>
+			<hr>
+		</div>
+			<div class="inputfield">
+				<p>The Vehicle is currently damaged {{ form.damaged }}</p>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Vehicle power</p>
+				<div>{{ form.power_kw }} kW</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Fuel type</p>
+				<div>{{ form.fuel }}</div>
+			</div>
+			<hr>
+		</div>
+		<div class="fuelaffected">
+			<div class="inputfield">
+				<p>Displacement</p>
+				<div>{{ form.displacement_cm }} cm^3</div>
+			</div>
+			<hr>
+		</div>
+		<div class="fuelaffected">
+			<div class="inputfield">
+				<p>Number of cylinders</p>
+				<div>{{ form.cylinders }}</div>
+			</div>
+			<hr>
+		</div>
+		<div class="fuelaffected">
+			<div class="inputfield">
+				<p>Fuel tank size</p>
+				<div>{{ form.fuel_tank_l }} l</div>
+			</div>
+			<hr>
+		</div>
+		<div  class="fuelaffected">
+			<div class="inputfield">
+				<p>Fuel consumption (urban)</p>
+				<div>{{ form.fuel_usage_city }} l/100km</div>
+			</div>
+			<hr>
+		</div>
+		<div  class="fuelaffected">
+			<div class="inputfield">
+				<p>Fuel consumption (extra-urban)</p>
+				<div>{{ form.fuel_usage_out }} l/100km</div>
+			</div>
+			<hr>
+		</div>
+		<div  class="fuelaffected">
+			<div class="inputfield">
+				<p>Fuel consumption (average)</p>
+				<div>{{ form.fuel_usage_average }} l/100km</div>
+			</div>
+			<hr>
+		</div>
+		<div  class="fuelaffected">
+			<div class="inputfield">
+				<p>Transmission</p>
+				<div>{{ form.transmission }}</div>
+			</div>
+			<hr>
+		</div>
+		<div class="electicaffected d-none">
+			<div class="inputfield">
+				<p>Number of motors</p>
+				<div>{{ form.cylinders }}</div>
+			</div>
+			<hr>
+		</div>
+		<div class="electicaffected d-none">
+			<div class="inputfield">
+				<p>Battery capacity</p>
+				<div>{{ form.fuel_tank_l }} kWh</div>
+			</div>
+			<hr>
+		</div>
+		<div  class="electicaffected d-none">
+			<div class="inputfield">
+				<p>Electricity consumption (urban)</p>
+				<div>{{ form.fuel_usage_city }} kWh/100km</div>
+			</div>
+			<hr>
+		</div>
+		<div  class="electicaffected d-none">
+			<div class="inputfield">
+				<p>Electricity consumption (extra-urban)</p>
+				<div>{{ form.fuel_usage_out }} kWh/100km</div>
+			</div>
+			<hr>
+		</div>
+		<div  class="electicaffected average_consumption d-none">
+			<div class="inputfield">
+				<p>Electricity consumption (average)</p>
+				<div>{{ form.fuel_usage_average }} kWh/100km</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Mileage</p>
+				<div>{{ form.mileage_km }} km</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Drive</p>
+				<div>{{ form.drive }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Number of doors</p>
+				<div>{{ form.doors }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Number of seats</p>
+				<div>{{ form.seats }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Equipment</p>
+				<div>{{ form.equipment }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Steeringwheel</p>
+				<div>{{ form.steeringwheel }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Location of vehicle</p>
+				<div>{{ form.location }}</div>
+			</div>
+			<hr>
+			<div>
+		</div>
+			<div class="inputfield">
+				<div>This vehicle has been imported {{ form.is_import }}</div>
+			</div>
+			<hr>
+		</div>
+		<div class="importaffected d-none">
+			<div class="inputfield">
+				<p>Date of the import</p>
+				<div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+				 {{ form.date_of_import }}
+			
+			  		<div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+				    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+				  </div>
+				</div>
+			</div>
+			<hr>
+		</div>
+		<div class="importaffected d-none">
+			<div class="inputfield">
+				<p>Country of origin</p>
+				<div>{{ form.country_of_origin }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<div>I am owner nr {{ form.nr_owner }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<div>This vehicle has been customised {{ form.customisation }}</div>
+			</div>
+			<hr>
+		</div>
+		<div class="customisationaffected d-none">
+			<div class="inputfield">
+				<p>Description of the customisation</p>
+				<div>{{ form.customisation_desc }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Vehicle VIN</p>
+				<div>{{ form.vin_code }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Numberplate</p>
+				<div>{{ form.numberplate }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Optical condition</p>
+				<div>{{ form.optical_condition }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Technical condition</p>
+				<div>{{ form.technical_condition }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Interior condition</p>
+				<div>{{ form.interior_condition }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Last service date</p>
+				<div class="input-group date" id="datetimepicker5" data-target-input="nearest">
+				 {{ form.last_service_date }}
+			
+				  <div class="input-group-append" data-target="#datetimepicker5" data-toggle="datetimepicker">
+				    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+				  </div>
+				</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Last service description</p>
+				<div>{{ form.last_service_desc }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Vehicle description</p>
+				<div>{{ form.vehicle_desc }}</div>
+			</div>
+			<hr>
+		</div>
+		<div>
+			<div class="inputfield">
+				<p>Ad type</p>
+				<div>{{ form.ad_type }}</div>
+			</div>
+			<hr>
+		</div>
+		<div class="inputfield">
+			<input type="submit" name="Save"/>
+		</div>
+	</form>
+<script>
+  $(function () {
+    $("#datetimepicker1").datetimepicker({
+      format: 'DD-MM-YYYY',
+    });
+  });
+
+  $(function () {
+    $("#datetimepicker2").datetimepicker({
+      format: 'DD-MM-YYYY',
+    });
+  });
+
+  $(function () {
+    $("#datetimepicker3").datetimepicker({
+      format: 'DD-MM-YYYY',
+    });
+  });
+
+  $(function () {
+    $("#datetimepicker4").datetimepicker({
+      format: 'DD-MM-YYYY',
+    });
+  });
+
+  $(function () {
+    $("#datetimepicker5").datetimepicker({
+      format: 'DD-MM-YYYY',
+    });
+  });
+</script>
+<script src="{% static 'autoad/create_function.js' %}" type="module"></script> 
+{% else %}
+<center><h1>You are not allowed to edit this vehicle!</h1></center>
+{% endif %}
+
+{% endblock %}

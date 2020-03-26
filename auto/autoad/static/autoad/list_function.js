@@ -2,35 +2,42 @@ import {ABARTH_MODEL_LIST, AC_MODEL_LIST, ACURA_MODEL_LIST, AIXAM_MODEL_LIST, AL
 
 $( document ).ready(function () {
   var brand = $("#id_brand").val().toUpperCase().replace(' ', '').replace('-', '_');
-  var list_name = eval(brand + '_MODEL_LIST');
+  var list_name = [];
   var content = "";
-  for (var i = 0; i < list_name.length; i++){
+  if ((brand != '') && (brand != 'OTHER')){
+    list_name = eval(brand + '_MODEL_LIST')
+    for (var i = 0; i < list_name.length; i++){
     content += '<option value="' + list_name[i] + '">' + list_name[i] + '</option>'
+    };
+  } else {
+    content = '<option value="">---------</option>'
   };
   content = $.parseHTML(content);
   $( "#vehicle_model" ).html(content);
-  if ($( "#id_vehicle_model" ).val() != "") {
-    $( "#vehicle_model" ).val($( "#id_vehicle_model" ).val()); 
-  };
+  $( "#id_vehicle_model" ).val('');
 });
 
 $( "#id_brand" ).click(function() {
   var brand = $("#id_brand").val().toUpperCase().replace(' ', '').replace('-', '_');
-  var list_name = eval(brand + '_MODEL_LIST');
-  var content = "";
-  for (var i = 0; i < list_name.length; i++){
+  var list_name = [];
+  var content = "---------";
+  if ((brand != '') && (brand != 'OTHER')){
+    list_name = eval(brand + '_MODEL_LIST')
+    for (var i = 0; i < list_name.length; i++){
     content += '<option value="' + list_name[i] + '">' + list_name[i] + '</option>'
+    };
   };
   content = $.parseHTML(content);
   $( "#vehicle_model" ).html(content);
+  $( "#id_vehicle_model" ).val('');
 });
 
 
 $( "#vehicle_model" ).click(function() {
   var modelname = $( "#vehicle_model" ).val();
-  if (modelname == ('Any' | '')){
-  	$( "#id_vehicle_model" ).val('');
+  if ((modelname == 'Any') || (modelname == '')){
+    $( "#id_vehicle_model" ).val('');
   } else {
-  	$( "#id_vehicle_model" ).val(modelname);
+    $( "#id_vehicle_model" ).val(modelname);
   };
 });

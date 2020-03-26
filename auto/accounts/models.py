@@ -12,14 +12,6 @@ class UserManager(BaseUserManager):
 			raise ValueError('Users must have an email address.')
 		if not password:
 			raise ValueError('Users must have a password.')
-		if not first_name:
-			raise ValueError('Users must have a first name.')
-		if not last_name:
-			raise ValueError('Users must have a last name.')
-		if not gender:
-			raise ValueError('Users must have a gender.')
-		if not birthday:
-			raise ValueError('Users must have a birthday.')
 		user_obj = self.model(
 			email = self.normalize_email(email),
 			first_name=first_name,

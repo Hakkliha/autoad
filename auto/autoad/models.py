@@ -4,6 +4,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 #from django.contrib.gis.utils import GeoIP
 import datetime
 
+from django.conf import settings
+
 from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_USED_LIST, FUEL_TYPE, TRANSMISSION_TYPE, DRIVE_TYPE, STEERINGWHEEL_POSITION, COUNTRY_OF_ORIGIN_LIST,
 	O_CONDITION_LIST,
 	T_CONDITION_LIST,
@@ -33,13 +35,13 @@ def current_today():
 def current_month():
 	month = datetime.date.today().month
 	if month < 10:
-		return '0' + month
+		return f'0{month}'
 	else:
 		return month
 
 # Create your models here.
 class Vehicle(models.Model):
-	pictures 			= models.ImageField(upload_to="image_files", max_length=100, blank=True)
+	pictures 			= models.ImageField(null=True, blank=True, upload_to='vehicles/%Y/%m/%d/')
 	vehicle_type		= models.CharField(max_length=60, blank=True, choices=VEHICLE_TYPE_LIST)
 	price				= models.DecimalField(max_digits=8, decimal_places=2, blank=True)
 	value_added_tax		= models.BooleanField(blank=True)
@@ -90,7 +92,7 @@ class Vehicle(models.Model):
 	promoted			= models.DateTimeField(auto_now=True, blank=True)
 	booked_until		= models.BooleanField(blank=True, default=False)
 	active				= models.BooleanField(blank=True, default=True)
-	user 				= models.CharField(max_length=60, blank=True, default='Anonymous')
+	user 				= models.ForeignKey('accounts.User', on_delete=models.CASCADE, null=True)
 
 	def get_absolute_url(self):
 		return reverse("autoad:vehicle-detail", kwargs={'pk': self.id})
@@ -100,3 +102,7 @@ class Vehicle(models.Model):
 
 	class Meta:
 		ordering = ('creation_datetime', 'price',)	
+
+	def delete(self, *args, **kwargs):
+		self.pictures.delete()
+		super().delete(*args, **kwargs)

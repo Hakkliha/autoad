@@ -12,7 +12,7 @@ from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_
 from django.conf import settings
 
 class VehicleForm(forms.ModelForm):
-	pictures = forms.ImageField(allow_empty_file=True, required=False)
+	pictures = forms.ImageField(max_length=60, required=False)
 	vehicle_type = forms.ChoiceField(choices=VEHICLE_TYPE_LIST)
 	new_used = forms.ChoiceField(choices=NEW_USED_LIST)
 	price = forms.DecimalField(max_value=100000000, min_value=0, decimal_places=2)

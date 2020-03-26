@@ -19,7 +19,7 @@ BRAND_LIST = (
 ('Aixam', 'Aixam'),
 ('Alfa Romeo', 'Alfa Romeo'),
 ('ALPINA', 'ALPINA'),
-('Atega', 'Atega'),
+('Artega', 'Artega'),
 ('Asia Motors', 'Asia Motors'),
 ('Aston Martin', 'Aston Martin'),
 ('Audi', 'Audi'),
