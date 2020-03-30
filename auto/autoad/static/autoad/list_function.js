@@ -15,6 +15,10 @@ $( document ).ready(function () {
   content = $.parseHTML(content);
   $( "#vehicle_model" ).html(content);
   $( "#id_vehicle_model" ).val('');
+  for (var i = $( ".price_price" ).length - 1; i >= 0; i--) {
+    var price = $( ".price_price:eq("+ i +")" ).text();
+    $( ".price_price:eq("+ i +")" ).text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "));
+  };
 });
 
 $( "#id_brand" ).click(function() {

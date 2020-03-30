@@ -1,6 +1,8 @@
 from django import forms
 
 from .models import Vehicle, year_choices, current_year, current_today, current_month
+from django.core import validators
+from django.core.exceptions import ValidationError
 
 from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_USED_LIST, FUEL_TYPE, TRANSMISSION_TYPE, DRIVE_TYPE, STEERINGWHEEL_POSITION, COUNTRY_OF_ORIGIN_LIST,
 	O_CONDITION_LIST,
@@ -11,8 +13,10 @@ from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_
 
 from django.conf import settings
 
+
+
 class VehicleForm(forms.ModelForm):
-	pictures = forms.ImageField(max_length=60, required=False)
+	pictures = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
 	vehicle_type = forms.ChoiceField(choices=VEHICLE_TYPE_LIST)
 	new_used = forms.ChoiceField(choices=NEW_USED_LIST)
 	price = forms.DecimalField(max_value=100000000, min_value=0, decimal_places=2)
@@ -119,4 +123,13 @@ class VehicleForm(forms.ModelForm):
 			'last_service_desc',
 			'vehicle_desc',
 			'ad_type'
+		]
+
+
+
+class ActiveVehicleForm(forms.ModelForm):
+	class Meta:
+		model = Vehicle
+		fields = [
+		'active'
 		]

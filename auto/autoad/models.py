@@ -1,9 +1,11 @@
 from django.db import models
 from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.template.defaultfilters import slugify
 #from django.contrib.gis.utils import GeoIP
 import datetime
-
+import shutil
+import os
 from django.conf import settings
 
 from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_USED_LIST, FUEL_TYPE, TRANSMISSION_TYPE, DRIVE_TYPE, STEERINGWHEEL_POSITION, COUNTRY_OF_ORIGIN_LIST,
@@ -41,9 +43,9 @@ def current_month():
 
 # Create your models here.
 class Vehicle(models.Model):
-	pictures 			= models.ImageField(null=True, blank=True, upload_to='vehicles/%Y/%m/%d/')
+	pictures 			= models.CharField(max_length=1000, null=True, blank=True)
 	vehicle_type		= models.CharField(max_length=60, blank=True, choices=VEHICLE_TYPE_LIST)
-	price				= models.DecimalField(max_digits=8, decimal_places=2, blank=True)
+	price				= models.PositiveIntegerField(validators=[MaxValueValidator(100000000)], blank=True)
 	value_added_tax		= models.BooleanField(blank=True)
 	new_used			= models.CharField(max_length=60, blank=True, choices=NEW_USED_LIST)
 	warranty_until		= models.DateField(auto_now=False, blank=True, null=True)
@@ -98,11 +100,15 @@ class Vehicle(models.Model):
 		return reverse("autoad:vehicle-detail", kwargs={'pk': self.id})
 
 	def __str__(self):
-		return f"({self.id}) {self.vehicle_model_year} {self.brand} {self.vehicle_model} {self.vehicle_model_other} by {self.user} {self.creation_datetime}"
+		if self.vehicle_model_other:
+			return f"({self.id}) {self.vehicle_model_year} {self.brand} {self.vehicle_model} {self.vehicle_model_other} by {self.user} {self.creation_datetime}"
+		else:
+			return f"({self.id}) {self.vehicle_model_year} {self.brand} {self.vehicle_model} by {self.user} {self.creation_datetime}"
 
 	class Meta:
 		ordering = ('creation_datetime', 'price',)	
 
 	def delete(self, *args, **kwargs):
-		self.pictures.delete()
+		print(self.pictures[9:30])
+		shutil.rmtree(os.path.join(settings.MEDIA_ROOT, self.pictures[9:30]), ignore_errors=True) 
 		super().delete(*args, **kwargs)

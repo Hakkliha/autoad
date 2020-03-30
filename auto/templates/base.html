@@ -3,10 +3,12 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'base_style.css' %}">
 	{% block title %}
-
+		
 		<title>Autoprotaal</title>
-
+		
 	{% endblock %}
 
 	<!-- Latest compiled and minified CSS -->
@@ -22,5 +24,6 @@
 	{% include 'navbar.html' %}
 	{% block content %}
 	{% endblock %}
+	<footer><h6>wheelbro.com</h6></footer>
 </body>
 </html>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if request.user == object.user %}
+<center>
+	<form method='POST'>{% csrf_token %}
+	    <h1>Change "{{ object.vehicle_model_year }} {{ object.brand }} {{ object.vehicle_model }}{% if instance.vehicle_model_other %} {{ instance.vehicle_model_other }}{% endif %}" active/inactive</h1>
+	    {{form.as_p}}
+	    <p><input type='submit' value='Save'/> <a href='../'>Cancel</a><p>
+	</form>
+</center>
+
+{% else %}
+<center><h1>You do not have permission to delete this vehicle.</h1></center>
+
+{% endif %}
+
+{% endblock %}

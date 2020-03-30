@@ -1,0 +1,109 @@
+table, th, td {
+	border: 1px solid black;
+}
+
+td, th {
+	padding: 5px 8px;
+}
+
+table {
+	margin-bottom: 25px;
+	flex-grow: 1;
+	margin: 10px;
+}
+
+hr {
+  clear: both;
+  display: block;              
+  background-color: #FFFF00;
+  height: 1px;
+}
+
+#main_container {
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+#vehicle_display {
+	display: flex;
+	flex-flow: row wrap;
+	padding: 20px 2% 0 2%;
+	width: 100%;
+}
+
+.active_banner {
+	width: 100%;
+	text-align: center;
+	color: darkred;
+	padding: 10px;
+	border: 2px darkred solid;
+	margin-bottom: 10px;
+}
+
+.other_picture_element {
+	border-radius: 10px;
+	border: 2px lightgrey solid;
+	object-fit: cover;
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+#info_tables {
+	display: flex;
+	flex-flow: row wrap;
+	width: 100%;
+	justify-content: center;
+
+}
+
+#bodyandprice {
+	display: flex;
+	flex-flow: row;
+	justify-content: space-between;
+	margin: auto 20px auto 10px;
+	align-items: center;
+}
+
+#bodyandprice p {
+	padding: 5px 10px;
+	border-radius: 5px;
+	color: white;
+}
+
+#price {
+	text-align: center;
+}
+
+#price h6 {
+	font-size: 12px;
+	color: darkgrey;
+}
+
+#price h4 {
+	font-size: 40px;
+	margin: 0;
+}
+
+#vehicle_name {
+	display: flex;
+	margin: auto 20px auto 10px;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+
+#customised_table, #equipment_table {
+	width: 100%;
+}
+
+.damage_notice {
+	color: red;
+	font-weight: bold;
+	border: 2px dashed red;
+	border-radius: 7px;
+	padding: 7px;
+	width: auto;
+	margin: 20px 10px;
+	text-align: center;
+}

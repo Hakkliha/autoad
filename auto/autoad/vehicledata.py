@@ -1,6 +1,6 @@
 VEHICLE_TYPE_LIST = (('Car','Car'),) #('Van','Van'), ('Truck','Truck'), ('Bus','Bus'), ('Mototechnics','Mototechnics'), ('Water vehicles','Water vehicles'), ('Racing vehicles','Racing vehicles'), ('Trailer','Trailer'), ('Caravan','Caravan'), ('Special Vehicles','Special Vehicles'))
 
-BODY_TYPE_CHOICES = (('Saloon', 'Saloon'), ('Cabriolet / Roadster', 'Cabriolet / Roadster'), ('Estate Car', 'Estate Car'), ('Small Car', 'Small Car'), ('Sports Car / Coupe', 'Sports Car / Coupe'), ('SUV / Off-road Vehicle / Pickup Truck', 'SUV / Off-road Vehicle / Pickup Truck'), ('Van / Minibus', 'Van / Minibus'), ('Other', 'Other'))
+BODY_TYPE_CHOICES = (('Saloon', 'Saloon'), ('Cabriolet / Roadster', 'Cabriolet / Roadster'), ('Estate Car', 'Estate Car'), ('Small Car', 'Small Car'), ('Sports Car / Coupe', 'Sports Car / Coupe'), ('SUV / Off-road Vehicle', 'SUV / Off-road Vehicle'), ('Van / Minibus', 'Van / Minibus'), ('Pickup Truck', 'Pickup Truck'), ('Other', 'Other'))
 
 NEW_USED_LIST = (('Used', 'Used'), ('New', 'New'))
 
@@ -363,7 +363,4 @@ I_CONDITION_LIST = (
 AD_TYPE_LIST = (
 ('Sale', 'Sale'),
 ('Buy', 'Buy'),
-('Swap', 'Swap'),
-('Sale or Swap', 'Sale or Swap'),
-('Buy or Swap', 'Buy or Swap'),
 )

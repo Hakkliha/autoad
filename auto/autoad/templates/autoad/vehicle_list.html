@@ -10,18 +10,21 @@
 
 
 {% block content %}
-<form method="GET">
-	<div id="searchbar">
-	<div>Vehicle make {{ filter.form.brand }}</div><div class="d-none">{{ filter.form.vehicle_model }}</div><div>Vehicle model <select id="vehicle_model"><option>Choose a model</option></select></div><div>Order by {{ filter.form.ordering }}</div>
-	<button type="submit" class="btn btn-primary">Search</button>
-	</div>
-</form>
-{% for instance in filter.qs %}
-	<div class="listitem">
-		<h2><a href='{{ instance.get_absolute_url }}'> {{ instance.brand }} {{ instance.vehicle_model }} {{ instance.vehicle_model_other }} {{ instance.vehicle_model_year }} - € {{ instance.price }}</a></h2>
-	</div>
-	<hr>
-{% endfor %}
-
+<div id="main_content">
+	<form method="GET">
+		<div id="searchbar">
+		<div>Vehicle make {{ filter.form.brand }}</div><div class="d-none">{{ filter.form.vehicle_model }}</div><div>Vehicle model <select id="vehicle_model"><option>Choose a model</option></select></div><div>Order by {{ filter.form.ordering }}</div>
+		<button type="submit" class="btn btn-primary">Search</button>
+		</div>
+	</form>
+	{% for instance in filter.qs %}
+		{% if instance.active %}
+		<div class="listitem">
+			<h2><a href='{{ instance.get_absolute_url }}'> {{ instance.brand }} {{ instance.vehicle_model }} {% if instance.vehicle_model_other %}{{ instance.vehicle_model_other }}{% endif %} {{ instance.vehicle_model_year }} <p class="price_price">{{ instance.price }} €</p></a></h2>
+		</div>
+		<hr>
+		{% endif %}
+	{% endfor %}
+</div>
 <script src="{% static 'autoad/list_function.js' %}" type="module"></script> 
 {% endblock %}

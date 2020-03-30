@@ -1,3 +1,8 @@
+#main_content {
+	height: 1000px;
+	width: 100%;
+}
+
 .listitem {
 	margin: 20px 0 10px 20px;
 }

@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.base import View, HttpResponse, HttpResponseRedirect
+from django.forms import modelformset_factory
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required 
 import datetime, random, string, os
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
+from django.core.exceptions import ValidationError
 
-from .forms import VehicleForm
+from .forms import VehicleForm, ActiveVehicleForm
 
 from .models import Vehicle
 
@@ -47,17 +49,30 @@ class VehicleCreateView(View):
 			'form': form
 		}
 		return render(request, self.template_name, context)
-
 	def post(self, request, *args, **kwargs):
 		form = VehicleForm(request.POST, request.FILES)
-		print(request.POST, request.FILES)
 		if form.is_valid():
-			uploaded_file = request.FILES['pictures']
-			fs = FileSystemStorage()
+			uploaded_files = request.FILES.getlist('pictures')
+			images_array = []
 			random_char = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
-			name = fs.save(random_char + uploaded_file.name, uploaded_file)
-			path = fs.url(name)
-			print(name)
+			dt = datetime.datetime.today()
+			if dt.month < 10:
+				dt_path = str(dt.day) + "_0" + str(dt.month) + "_" + str(dt.year)
+			else:
+				dt_path = str(dt.day) + "_" + str(dt.month) + "_" + str(dt.year)
+			fs = FileSystemStorage("media/"+ dt_path + "/" + random_char + "/")
+			for f in uploaded_files:
+				print(f.name[-3:])
+				if f.size > 5242880:
+					raise ValidationError(f.name + ': File size cannot larger than 5mb.')
+				if (f.name[-3:] != "jpg") and (f.name[-3:] !="png") and (f.name[-3:] != "gif"):
+						raise ValidationError(f.name + ': File format nor allowed.')
+				
+				name = fs.save(random_char + f.name, f)
+				path = "/media/" + dt_path + "/"+random_char+"/"+name
+				images_array.append(path)
+			if len(images_array) > 15:
+				raise ValidationError('Upload a maximum of 15 files.')
 			vehicle_type = form.cleaned_data['vehicle_type']
 			new_used = form.cleaned_data['new_used']
 			price = form.cleaned_data['price']
@@ -104,7 +119,7 @@ class VehicleCreateView(View):
 			last_service_desc = form.cleaned_data['last_service_desc']
 			vehicle_desc = form.cleaned_data['vehicle_desc']
 			ad_type = form.cleaned_data['ad_type']
-			new_vehicle = Vehicle(user=request.user, pictures=name, vehicle_type=vehicle_type, new_used=new_used, price=price, value_added_tax=value_added_tax, warranty_until=warranty_until,
+			new_vehicle = Vehicle(user=request.user, pictures=images_array, vehicle_type=vehicle_type, new_used=new_used, price=price, value_added_tax=value_added_tax, warranty_until=warranty_until,
 				insurance_until=insurance_until, valid_mot_until=valid_mot_until, service_history_bk=service_history_bk, accident=accident,
 				damaged=damaged, vehicle_model_year=vehicle_model_year, brand=brand, vehicle_model=vehicle_model, vehicle_model_other=vehicle_model_other,
 				body_type=body_type, power_kw=power_kw, displacement_cm=displacement_cm, cylinders=cylinders, fuel=fuel, fuel_tank_l=fuel_tank_l,
@@ -136,7 +151,19 @@ class VehicleUpdateView(UpdateView):
 		return get_object_or_404(vehicle, id=id_)'''
 	def form_valid(self, form):
 		if self.request.user == self.object.user:
-			print(form.cleaned_data)
+			return super().form_valid(form)
+		return HttpResponseRedirect('You are not allowed to edit this vehicle.')
+
+class VehicleChangeActiveView(UpdateView):
+	template_name = 'autoad/vehicle_active.html'
+	form_class = ActiveVehicleForm
+	queryset = Vehicle.objects.all()
+
+	'''def get_object(self):
+		id_ = self.kwargs.get('pk')
+		return get_object_or_404(vehicle, id=id_)'''
+	def form_valid(self, form):
+		if self.request.user == self.object.user:
 			return super().form_valid(form)
 		return HttpResponseRedirect('You are not allowed to edit this vehicle.')
 

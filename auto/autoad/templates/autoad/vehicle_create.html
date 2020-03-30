@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-	<form action="." method="POST" style="margin: 50px 0 0 0" class="create_form" enctype="multipart/form-data"> {% csrf_token %}
+	<form action="." method="POST" style="margin: 50px 0 0 0" class="create_form" enctype="multipart/form-data"> {% if request.user.is_authenticated %}{% csrf_token %}{% endif %}
 		<div class="d-none">
 			<div class="inputfield">
 				<p>Vehicle type</p>
@@ -154,7 +154,7 @@
 		<div class="fuelaffected">
 			<div class="inputfield">
 				<p>Displacement</p>
-				<div>{{ form.displacement_cm }} cm^3</div>
+				<div>{{ form.displacement_cm }} cm³</div>
 			</div>
 			<hr>
 		</div>
