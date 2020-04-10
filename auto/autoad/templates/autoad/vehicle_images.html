@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% load static %}
+	<title>{{ object.brand }} {{ object.vehicle_model }} {% if object.vehicle_model_other %}{{ object.vehicle_model_other }}{% endif %}{{ object.vehicle_model_year }}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'autoad/images_style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'autoad/slick/slick.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'autoad/slick/slick-theme.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div id="main_container">
+	<div id="vehicle_display">
+		<div id="vehicle_images" class="col-12">
+			<a href="../"><i class="fas fa-arrow-circle-left"></i> Back</a>
+			<p class="d-none" id="images_source">{{ object.pictures }}</p>
+			<div id="other_pictures"></div>
+			<div id="nav_pictures"></div>
+		</div>
+		
+	</div>
+</div>
+<script src="{% static 'autoad/images_function.js' %}" type="module"></script> 
+<script type="text/javascript" src="{% static 'autoad/slick/slick.min.js' %}"></script>
+{% endblock %}

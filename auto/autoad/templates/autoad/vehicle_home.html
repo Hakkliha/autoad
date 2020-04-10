@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+	<title>Search</title>
+	{% load static %}
+
+	<link rel="stylesheet" type="text/css" href="{% static 'autoad/home_style.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div id="main_content">
+	<div id="homeview">
+		<h1 style="text-align: center;">The Internets Favorite Place for New and Used Vehicles!</h1>
+		<a href="/search/" class="btn btn-primary">Browse</a>
+		<div id="disclaimer">
+			<h3><b><i class="fas fa-exclamation-triangle"></i> Disclaimer</b></h3>
+			<p>This website is in it's Alpha version. The Database may be wiped with future updates.</p>
+			
+		</div>
+	</div>
+</div>
+{% endblock %}

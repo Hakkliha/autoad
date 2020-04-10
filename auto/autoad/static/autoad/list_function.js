@@ -16,9 +16,25 @@ $( document ).ready(function () {
   $( "#vehicle_model" ).html(content);
   $( "#id_vehicle_model" ).val('');
   for (var i = $( ".price_price" ).length - 1; i >= 0; i--) {
-    var price = $( ".price_price:eq("+ i +")" ).text();
-    $( ".price_price:eq("+ i +")" ).text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "));
+    var price = $( ".price_price > b:eq("+ i +")" ).text();
+    $( ".price_price > b:eq("+ i +")" ).text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "));
   };
+
+  for (var i = $( ".mileage" ).length - 1; i >= 0; i--) {
+    var price = $( ".mileage > b:eq("+ i +")" ).text();
+    $( ".mileage > b:eq("+ i +")" ).text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "));
+  };
+
+  for (var i = 1; i < $( "#list_items > div" ).length + 1; i++) {
+    var img_source = $( "#ad_cover" + i ).attr('context').replace(/'/g, '').replace(/ /g, '').replace('[', '').replace(']', '').split(',');
+    if (img_source) {
+          $( "#ad_cover" + i ).attr('src', img_source[0]);
+        } else {
+          $( "#ad_cover" + i ).attr('src', '/media/base_media/default/def.jpg');
+        };
+  };
+  
+
 });
 
 $( "#id_brand" ).click(function() {

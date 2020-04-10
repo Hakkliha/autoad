@@ -13,6 +13,12 @@ class VehicleFilter(django_filters.FilterSet):
 
 	ordering = django_filters.ChoiceFilter(label='Ordering', choices=CHOICES, method='filter_by_order')
 
+	price = django_filters.RangeFilter(label='Price range')
+
+	vehicle_model_year = django_filters.RangeFilter(label='Vehicle model year')
+
+	mileage_km = django_filters.RangeFilter(label='Mileage')
+
 	class Meta:
 		model = Vehicle
 		fields = ('brand', 'vehicle_model',)

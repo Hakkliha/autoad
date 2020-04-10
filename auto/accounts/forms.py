@@ -10,10 +10,13 @@ class RegisterForm(forms.ModelForm):
     fields, plus a repeated password."""
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    birthday  = forms.DateField(widget=forms.TextInput(attrs={
+        "placeholder": 'DD-MM-YYYY'
+        }))
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'gender', 'birthday', 'email',) #'full_name',)
+        fields = ('first_name', 'last_name', 'gender', 'birthday', 'email',)
 
     def clean_password2(self):
         # Check that the two password entries match

@@ -3,7 +3,24 @@
 	margin-left: 50px;
 }
 
-.inputfield select, .inputfield input {
-	
+.fuelcells_style {
+	display: flex;
+	flex-flow: row nowrap;
+	height: 28px;
 }
 
+.fuelcells_style p {
+	margin-left: 5px;
+}
+
+.equipment_selection_field {
+	margin-bottom: 15px;
+}
+
+#errors_list {
+	padding: 10px;
+	border: 3px solid red;
+	border-radius: 5px;
+	margin: 10px;
+	list-style: none;
+}

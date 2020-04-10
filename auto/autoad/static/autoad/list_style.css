@@ -1,19 +1,54 @@
 #main_content {
-	height: 1000px;
+	min-height: 1000px;
 	width: 100%;
+	display: flex;
+	flex-flow: column nowrap;
 }
 
+.pagination {
+	align-self: center;
+}
+
+
 .listitem {
-	margin: 20px 0 10px 20px;
+	width: 100%;
+	display: flex;
+	flex-flow: row nowrap;
+	margin: auto auto auto 25px;
+}
+
+.details_area {
+	margin-left: 25px;
+	color: black;
 }
 
 #searchbar {
 	margin: 20px 0 10px 20px;
-	display: inline-flex;
+	display: flex;
+	flex-flow: row wrap;
 	justify-content: space-around;
 	align-items: center;
 }
 
 #searchbar div {
 	margin-right: 10px;
+	margin-bottom: 10px;
+	border: 1px solid blue;
+	border-radius: 3px;
+	padding: 5px;
+}
+
+.price_price s {
+	font-size: 15px;
+}
+
+.vehicle_details {
+	height: 150px;
+	width: 100%;
+	display: flex;
+	flex-flow: column wrap;
+}
+
+.vehicle_details h5 {
+	padding: 5px;
 }

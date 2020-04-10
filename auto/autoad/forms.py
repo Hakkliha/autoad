@@ -13,13 +13,12 @@ from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_
 
 from django.conf import settings
 
-
-
 class VehicleForm(forms.ModelForm):
 	pictures = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
 	vehicle_type = forms.ChoiceField(choices=VEHICLE_TYPE_LIST)
 	new_used = forms.ChoiceField(choices=NEW_USED_LIST)
-	price = forms.DecimalField(max_value=100000000, min_value=0, decimal_places=2)
+	price = forms.IntegerField(min_value=0, max_value=100000000)
+	reduced_price = forms.IntegerField(min_value=0, max_value=100000000, required=False)
 	value_added_tax = forms.BooleanField(required=False, label='VAT included in price 20%', initial=False)
 	warranty_until = forms.DateField(required=False, widget=forms.TextInput(attrs={
 		"placeholder": 'DD-MM-YYYY'
@@ -38,22 +37,22 @@ class VehicleForm(forms.ModelForm):
 	vehicle_model = forms.TextInput() # FRONT END JS MUUTUS !important lmao
 	vehicle_model_other = forms.CharField(required=False)
 	body_type = forms.ChoiceField(choices=BODY_TYPE_CHOICES)
-	power_kw = forms.IntegerField(min_value=0, max_value=20000, required=False)
+	power_kw = forms.IntegerField(min_value=0, max_value=20000, required=True)
 	displacement_cm = forms.IntegerField(min_value=0, required=False)
 	cylinders = forms.IntegerField(min_value=0, max_value=32, required=False)
-	fuel = forms.ChoiceField(choices=FUEL_TYPE)
+	fuel = forms.ChoiceField(choices=FUEL_TYPE, required=True)
 	fuel_tank_l = forms.IntegerField(min_value=0, max_value=2000, required=False)
 	fuel_usage_city = forms.DecimalField(max_value=1000, min_value=0, decimal_places=1, required=False)
 	fuel_usage_out = forms.DecimalField(max_value=1000, min_value=0, decimal_places=1, required=False)
 	fuel_usage_average = forms.DecimalField(max_value=1000, min_value=0, decimal_places=1, required=False)
-	mileage_km = forms.IntegerField(min_value=0, required=False)
-	transmission = forms.ChoiceField(choices=TRANSMISSION_TYPE, required=False)
-	drive = forms.ChoiceField(choices=DRIVE_TYPE, required=False)
+	mileage_km = forms.IntegerField(min_value=0, required=True)
+	transmission = forms.ChoiceField(choices=TRANSMISSION_TYPE)
+	drive = forms.ChoiceField(choices=DRIVE_TYPE, required=True)
 	doors = forms.IntegerField(min_value=0, max_value=20, required=False)
 	seats = forms.IntegerField(min_value=0, max_value=100, required=False)
 	equipment = forms.TextInput()
 	steeringwheel = forms.ChoiceField(choices=STEERINGWHEEL_POSITION)
-	location = forms.TextInput()
+	location = forms.CharField(required=True)
 	country_of_origin = forms.ChoiceField(choices=COUNTRY_OF_ORIGIN_LIST, required=False, initial="-")
 	is_import = forms.BooleanField(required=False, initial=False)
 	date_of_import = forms.DateField(required=False, widget=forms.TextInput(attrs={
@@ -79,6 +78,7 @@ class VehicleForm(forms.ModelForm):
 			'pictures',
 			'vehicle_type',
 			'price',
+			'reduced_price',
 			'value_added_tax',
 			'new_used',
 			'warranty_until',
