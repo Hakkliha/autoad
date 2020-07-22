@@ -6,21 +6,21 @@ ACURA_MODEL_LIST = (
  (('Any'), ('Any')), (('MDX'), ('MDX')), (('NSX'), ('NSX')), (('RL'), ('RL')), (('RSX'), ('RSX')), (('TL'), ('TL')), (('TSX'), ('TSX')), (('Other'), ('Other')), )
 AIXAM_MODEL_LIST = (
  (('Any'), ('Any')), (('City'), ('City')), (('Crossline'), ('Crossline')), (('Roadline'), ('Roadline')), (('Scouty R'), ('Scouty R')), (('Other'), ('Other')), )
-ALFA ROMEO_MODEL_LIST = (
+ALFAROMEO_MODEL_LIST = (
  (('Any'), ('Any')), (('4C'), ('4C')), (('8C'), ('8C')), (('Alfa 145'), ('Alfa 145')), (('Alfa 146'), ('Alfa 146')), (('Alfa 147'), ('Alfa 147')), (('Alfa 155'), ('Alfa 155')), (('Alfa 156'), ('Alfa 156')), (('Alfa 159'), ('Alfa 159')), (('Alfa 164'), ('Alfa 164')), (('Alfa 166'), ('Alfa 166')), (('Alfa 33'), ('Alfa 33')), (('Alfa 75'), ('Alfa 75')), (('Alfa 90'), ('Alfa 90')), (('Alfasud'), ('Alfasud')), (('Alfetta'), ('Alfetta')), (('Brera'), ('Brera')), (('Crosswagon'), ('Crosswagon')), (('Giulia'), ('Giulia')), (('Giulietta'), ('Giulietta')), (('GT'), ('GT')), (('GTV'), ('GTV')), (('Junior'), ('Junior')), (('MiTo'), ('MiTo')), (('Spider'), ('Spider')), (('Sprint'), ('Sprint')), (('Stelvio'), ('Stelvio')), (('Other'), ('Other')), )
 ALPINA_MODEL_LIST = (
  (('Any'), ('Any')), (('B10'), ('B10')), (('B12'), ('B12')), (('B3'), ('B3')), (('B4'), ('B4')), (('B5'), ('B5')), (('B6'), ('B6')), (('B7'), ('B7')), (('B8'), ('B8')), (('D10'), ('D10')), (('D3'), ('D3')), (('D4'), ('D4')), (('D5'), ('D5')), (('Roadster S'), ('Roadster S')), (('XD3'), ('XD3')), (('XD4'), ('XD4')), (('Other'), ('Other')), )
 ARTEGA_MODEL_LIST = (
  (('Any'), ('Any')), (('GT'), ('GT')), (('Other'), ('Other')), )
-ASIA MOTORS_MODEL_LIST = (
+ASIAMOTORS_MODEL_LIST = (
  (('Any'), ('Any')), (('Rocsta'), ('Rocsta')), (('Other'), ('Other')), )
-ASTON MARTIN_MODEL_LIST = (
+ASTONMARTIN_MODEL_LIST = (
  (('Any'), ('Any')), (('AR1'), ('AR1')), (('Cygnet'), ('Cygnet')), (('DB'), ('DB')), (('DB11'), ('DB11')), (('DB7'), ('DB7')), (('DB9'), ('DB9')), (('DBS'), ('DBS')), (('Lagonda'), ('Lagonda')), (('Rapide'), ('Rapide')), (('V12 Vantage'), ('V12 Vantage')), (('V8 Vantage'), ('V8 Vantage')), (('Vanquish'), ('Vanquish')), (('Virage'), ('Virage')), (('Other'), ('Other')), )
 AUDI_MODEL_LIST = (
  (('Any'), ('Any')), (('100'), ('100')), (('200'), ('200')), (('80'), ('80')), (('90'), ('90')), (('A1'), ('A1')), (('A2'), ('A2')), (('A3'), ('A3')), (('A4'), ('A4')), (('A4 Allroad'), ('A4 Allroad')), (('A5'), ('A5')), (('A6'), ('A6')), (('A6 Allroad'), ('A6 Allroad')), (('A7'), ('A7')), (('A8'), ('A8')), (('Cabriolet'), ('Cabriolet')), (('Coupé'), ('Coupé')), (('e-tron'), ('e-tron')), (('Q1'), ('Q1')), (('Q2'), ('Q2')), (('Q3'), ('Q3')), (('Q4'), ('Q4')), (('Q5'), ('Q5')), (('Q7'), ('Q7')), (('Q8'), ('Q8')), (('quattro'), ('quattro')), (('R8'), ('R8')), (('RS2'), ('RS2')), (('RS3'), ('RS3')), (('RS4'), ('RS4')), (('RS5'), ('RS5')), (('RS6'), ('RS6')), (('RS7'), ('RS7')), (('RSQ3'), ('RSQ3')), (('RSQ8'), ('RSQ8')), (('S1'), ('S1')), (('S2'), ('S2')), (('S3'), ('S3')), (('S4'), ('S4')), (('S5'), ('S5')), (('S6'), ('S6')), (('S7'), ('S7')), (('S8'), ('S8')), (('SQ2'), ('SQ2')), (('SQ5'), ('SQ5')), (('SQ7'), ('SQ7')), (('SQ8'), ('SQ8')), (('TT'), ('TT')), (('    TT'), ('    TT')), (('    TT RS'), ('    TT RS')), (('    TTS'), ('    TTS')), (('V8'), ('V8')), (('Other'), ('Other')), )
 AUSTIN_MODEL_LIST = (
  (('Any'), ('Any')), (('Other'), ('Other')), )
-AUSTIN HEALEY_MODEL_LIST = (
+AUSTINHEALEY_MODEL_LIST = (
  (('Any'), ('Any')), (('Other'), ('Other')), )
 BENTLEY_MODEL_LIST = (
  (('Any'), ('Any')), (('Arnage'), ('Arnage')), (('Azure'), ('Azure')), (('Benteyga'), ('Benteyga')), (('Brooklands'), ('Brooklands')), (('Continental'), ('Continental')), (('    Continental'), ('    Continental')), (('    Continental Flying Spur'), ('    Continental Flying Spur')), (('    Continental GT'), ('    Continental GT')), (('    Continental GTC'), ('    Continental GTC')), (('    Continental Supersports'), ('    Continental Supersports')), (('Eight'), ('Eight')), (('Flying Spur'), ('Flying Spur')), (('Mulsanne'), ('Mulsanne')), (('Turbo R'), ('Turbo R')), (('Turbo RT'), ('Turbo RT')), (('Turbo S'), ('Turbo S')), (('Other'), ('Other')), )
@@ -66,7 +66,7 @@ DODGE_MODEL_LIST = (
  (('Any'), ('Any')), (('Avenger'), ('Avenger')), (('Caliber'), ('Caliber')), (('Challenger'), ('Challenger')), (('Charger'), ('Charger')), (('Dakota'), ('Dakota')), (('Dart'), ('Dart')), (('Demon'), ('Demon')), (('Durango'), ('Durango')), (('Grand Caravan'), ('Grand Caravan')), (('Hornet'), ('Hornet')), (('Journey'), ('Journey')), (('Magnum'), ('Magnum')), (('Neon'), ('Neon')), (('Nitro'), ('Nitro')), (('RAM'), ('RAM')), (('Stealth'), ('Stealth')), (('Viper'), ('Viper')), (('Other'), ('Other')), )
 DONKERVOORT_MODEL_LIST = (
  (('Any'), ('Any')), (('D8'), ('D8')), (('S7'), ('S7')), (('S8'), ('S8')), (('Other'), ('Other')), )
-DS AUTOMOBILES_MODEL_LIST = (
+DSAUTOMOBILES_MODEL_LIST = (
  (('Any'), ('Any')), (('DS3'), ('DS3')), (('DS3 Crossback'), ('DS3 Crossback')), (('DS4'), ('DS4')), (('DS4 Crossback'), ('DS4 Crossback')), (('DS5'), ('DS5')), (('DS7 Crossback'), ('DS7 Crossback')), (('Other'), ('Other')), )
 FERRARI_MODEL_LIST = (
  (('Any'), ('Any')), (('208'), ('208')), (('246'), ('246')), (('250'), ('250')), (('275'), ('275')), (('288'), ('288')), (('308'), ('308')), (('328'), ('328')), (('330'), ('330')), (('348'), ('348')), (('360'), ('360')), (('365'), ('365')), (('400'), ('400')), (('412'), ('412')), (('456'), ('456')), (('458'), ('458')), (('488 GTB'), ('488 GTB')), (('488 Pista'), ('488 Pista')), (('488 Spider'), ('488 Spider')), (('512'), ('512')), (('550'), ('550')), (('575'), ('575')), (('599 GTB'), ('599 GTB')), (('599 GTO'), ('599 GTO')), (('599 SA Aperta'), ('599 SA Aperta')), (('612'), ('612')), (('750'), ('750')), (('812'), ('812')), (('California'), ('California')), (('Daytona'), ('Daytona')), (('Dino GT4'), ('Dino GT4')), (('Enzo Ferrari'), ('Enzo Ferrari')), (('F12'), ('F12')), (('F355'), ('F355')), (('F40'), ('F40')), (('F430'), ('F430')), (('F50'), ('F50')), (('FF'), ('FF')), (('GTC4Lusso'), ('GTC4Lusso')), (('LaFerrari'), ('LaFerrari')), (('Mondial'), ('Mondial')), (('Portofino'), ('Portofino')), (('Superamerica'), ('Superamerica')), (('Testarossa'), ('Testarossa')), (('Other'), ('Other')), )
@@ -76,7 +76,7 @@ FISKER_MODEL_LIST = (
  (('Any'), ('Any')), (('Karma'), ('Karma')), (('Other'), ('Other')), )
 FORD_MODEL_LIST = (
  (('Any'), ('Any')), (('Aerostar'), ('Aerostar')), (('B-Max'), ('B-Max')), (('Bronco'), ('Bronco')), (('Capri'), ('Capri')), (('C-Max'), ('C-Max')), (('Cougar'), ('Cougar')), (('Courier'), ('Courier')), (('Crown'), ('Crown')), (('Econoline'), ('Econoline')), (('Econovan'), ('Econovan')), (('EcoSport'), ('EcoSport')), (('Edge'), ('Edge')), (('Escape'), ('Escape')), (('Escort'), ('Escort')), (('Excursion'), ('Excursion')), (('Expedition'), ('Expedition')), (('Explorer'), ('Explorer')), (('Express'), ('Express')), (('F 100'), ('F 100')), (('F 150'), ('F 150')), (('F 250'), ('F 250')), (('F 350'), ('F 350')), (('Fairlane'), ('Fairlane')), (('Falcon'), ('Falcon')), (('Fiesta'), ('Fiesta')), (('Flex'), ('Flex')), (('Focus'), ('Focus')), (('Fusion'), ('Fusion')), (('Galaxy'), ('Galaxy')), (('Granada'), ('Granada')), (('Grand C-Max'), ('Grand C-Max')), (('Grand Tourneo'), ('Grand Tourneo')), (('GT'), ('GT')), (('Ka/Ka+'), ('Ka/Ka+')), (('Kuga'), ('Kuga')), (('Maverick'), ('Maverick')), (('Mercury'), ('Mercury')), (('Mondeo'), ('Mondeo')), (('Mustang'), ('Mustang')), (('Orion'), ('Orion')), (('Probe'), ('Probe')), (('Puma'), ('Puma')), (('Ranger'), ('Ranger')), (('Raptor'), ('Raptor')), (('Scorpio'), ('Scorpio')), (('Sierra'), ('Sierra')), (('S-Max'), ('S-Max')), (('Sportka'), ('Sportka')), (('Streetka'), ('Streetka')), (('Taunus'), ('Taunus')), (('Taurus'), ('Taurus')), (('Thunderbird'), ('Thunderbird')), (('Tourneo'), ('Tourneo')), (('    Tourneo'), ('    Tourneo')), (('    Tourneo Connect'), ('    Tourneo Connect')), (('    Tourneo Courier'), ('    Tourneo Courier')), (('    Tourneo Custom'), ('    Tourneo Custom')), (('Transit'), ('Transit')), (('    Transit'), ('    Transit')), (('    Transit Connect'), ('    Transit Connect')), (('    Transit Courier'), ('    Transit Courier')), (('    Transit Custom'), ('    Transit Custom')), (('Windstar'), ('Windstar')), (('Other'), ('Other')), )
-GAC GONOW_MODEL_LIST = (
+GACGONOW_MODEL_LIST = (
  (('Any'), ('Any')), (('Other'), ('Other')), )
 GEMBALLA_MODEL_LIST = (
  (('Any'), ('Any')), (('Other'), ('Other')), )
@@ -116,7 +116,7 @@ LAMBORGHINI_MODEL_LIST = (
  (('Any'), ('Any')), (('Aventador'), ('Aventador')), (('Countach'), ('Countach')), (('Diablo'), ('Diablo')), (('Espada'), ('Espada')), (('Gallardo'), ('Gallardo')), (('Huracán'), ('Huracán')), (('Jalpa'), ('Jalpa')), (('LM'), ('LM')), (('Miura'), ('Miura')), (('Murciélago'), ('Murciélago')), (('Urraco'), ('Urraco')), (('Urus'), ('Urus')), (('Other'), ('Other')), )
 LANCIA_MODEL_LIST = (
  (('Any'), ('Any')), (('Beta'), ('Beta')), (('Dedra'), ('Dedra')), (('Delta'), ('Delta')), (('Flaminia'), ('Flaminia')), (('Flavia'), ('Flavia')), (('Fulvia'), ('Fulvia')), (('Gamma'), ('Gamma')), (('Kappa'), ('Kappa')), (('Lybra'), ('Lybra')), (('MUSA'), ('MUSA')), (('Phedra'), ('Phedra')), (('Prisma'), ('Prisma')), (('Stratos'), ('Stratos')), (('Thema'), ('Thema')), (('Thesis'), ('Thesis')), (('Voyager'), ('Voyager')), (('Ypsilon'), ('Ypsilon')), (('Zeta'), ('Zeta')), (('Other'), ('Other')), )
-LAND ROVER_MODEL_LIST = (
+LANDROVER_MODEL_LIST = (
  (('Any'), ('Any')), (('Defender'), ('Defender')), (('Discovery'), ('Discovery')), (('Discovery Sport'), ('Discovery Sport')), (('Freelander'), ('Freelander')), (('Range Rover'), ('Range Rover')), (('Range Rover Evoque'), ('Range Rover Evoque')), (('Range Rover Sport'), ('Range Rover Sport')), (('Range Rover Velar'), ('Range Rover Velar')), (('Serie I'), ('Serie I')), (('Serie II'), ('Serie II')), (('Serie III'), ('Serie III')), (('Other'), ('Other')), )
 LANDWIND_MODEL_LIST = (
  (('Any'), ('Any')), (('CV-9'), ('CV-9')), (('S'), ('S')), (('SC2'), ('SC2')), (('SC4'), ('SC4')), (('Other'), ('Other')), )

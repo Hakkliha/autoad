@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'autoad',
     'django_filters',
-    'accounts'
+    'accounts',
+    'vehicle_models'
 ]
 
 AUTH_USER_MODEL = 'accounts.User'

@@ -35,4 +35,3 @@ with open('model_list_file.py', 'w') as new_file:
 	for i, line in enumerate(g):
 		new_file.write(f'{g[i]} {f[i]}')
 
-

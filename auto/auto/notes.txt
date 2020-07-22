@@ -1,9 +1,9 @@
 
-1. Create a backup of saved vehicles
+1. Create a backup of saved data
 
 python manage.py dumpdata autoad.Vehicle --format json --indent 4 > autoad/fixtures/vehicles.json
 
 
-Load the aformentioned date
+Load the aformentioned data
 
 python manage.py loaddata products/fixtures/products.json

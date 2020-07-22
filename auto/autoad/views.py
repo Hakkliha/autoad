@@ -108,8 +108,9 @@ class VehicleCreateView(View):
 			new_used = form.cleaned_data['new_used']
 			price = form.cleaned_data['price']
 			reduced_price = form.cleaned_data['reduced_price']
-			if reduced_price > price:
-				self.my_errors.append('The reduced price cannot be bigger than the regular price.')
+			if reduced_price != None:
+				if reduced_price > price:
+					self.my_errors.append('The reduced price cannot be bigger than the regular price.')
 			value_added_tax = form.cleaned_data['value_added_tax']
 			warranty_until = form.cleaned_data['warranty_until']
 			insurance_until = form.cleaned_data['insurance_until']
