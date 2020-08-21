@@ -1,6 +1,10 @@
+body {
+	max-width: 100%;
+}
+
 #main_content {
 	min-height: 1000px;
-	width: 100%;
+	max-width: 100%;
 	display: flex;
 	flex-flow: column nowrap;
 }
@@ -9,12 +13,11 @@
 	align-self: center;
 }
 
-
 .listitem {
 	width: 100%;
 	display: flex;
 	flex-flow: row nowrap;
-	margin: auto auto auto 25px;
+	padding-left: 20px;
 }
 
 .details_area {
@@ -23,19 +26,24 @@
 }
 
 #searchbar {
-	margin: 20px 0 10px 20px;
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-around;
-	align-items: center;
+	padding: 20px;
 }
 
-#searchbar div {
-	margin-right: 10px;
-	margin-bottom: 10px;
-	border: 1px solid blue;
-	border-radius: 3px;
-	padding: 5px;
+.searchbox {
+	background: linear-gradient(rgba(133, 188, 213, 0.45), rgba(183, 215, 230, 0.45));
+	padding: 20px;
+	border-radius: 10px;
+	display: block;
+	float: left;
+}
+
+table tr td {
+	padding: 10px;
+	text-align: center;
+}
+
+table tr {
+	border-bottom: 1px solid lightgray;
 }
 
 .price_price s {

@@ -9,10 +9,11 @@ class RegisterForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
-    birthday  = forms.DateField(widget=forms.TextInput(attrs={
+    password2 = forms.CharField(
+        label='Password confirmation', widget=forms.PasswordInput)
+    birthday = forms.DateField(widget=forms.TextInput(attrs={
         "placeholder": 'DD-MM-YYYY'
-        }))
+    }))
 
     class Meta:
         model = User
@@ -42,7 +43,8 @@ class UserAdminCreationForm(forms.ModelForm):
     fields, plus a repeated password.
     """
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label='Password confirmation', widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -74,7 +76,8 @@ class UserAdminChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'gender', 'birthday', 'email', 'password', 'active', 'admin')
+        fields = ('first_name', 'last_name', 'gender', 'birthday',
+                  'email', 'password', 'active', 'admin')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -82,6 +85,7 @@ class UserAdminChangeForm(forms.ModelForm):
         # field does not have access to the initial value
         return self.initial["password"]
 
+
 class LoginForm(forms.Form):
-    email    = forms.EmailField(label='Email')
+    email = forms.EmailField(label='Email')
     password = forms.CharField(widget=forms.PasswordInput)

@@ -2,34 +2,55 @@
 
 {% block title %}
 {% load static %}
-	<title>{{ object.brand }} {{ object.vehicle_model }} {% if object.vehicle_model_other %}{{ object.vehicle_model_other }}{% endif %}{{ object.vehicle_model_year }}</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'autoad/detail_style.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'autoad/slick/slick.css' %}"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'autoad/slick/slick-theme.css' %}"/>
+<title>{{ object.brand }} {{ object.vehicle_model }}
+	{% if object.vehicle_model_other %}{{ object.vehicle_model_other }}{% endif %}{{ object.vehicle_model_year }}
+</title>
+<link rel="stylesheet" type="text/css" href="{% static 'autoad/detail_style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'autoad/slick/slick.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'autoad/slick/slick-theme.css' %}" />
 {% endblock %}
 
 {% block content %}
 <div id="main_container">
 	<div id="vehicle_display">
 		<div id="name_div">
-			{% if not object.active %}<div class="active_banner"><i class="fas fa-exclamation-circle"></i> This advert is inactive</div>{% endif %}
+			{% if not object.active %}<div class="active_banner"><i class="fas fa-exclamation-circle"></i> This advert
+				is inactive</div>{% endif %}
 			<div id="vehicle_name">
-			<h1>{{ object.brand }} {{ object.vehicle_model }} {% if object.vehicle_model_other %}{{ object.vehicle_model_other }}{% endif %}</h1>
-			{% if request.user == object.user %}
-			<div id="action_buttons">
-				<a href="./edit/" class="btn btn-info" style="margin-left: 25px"><i class="fas fa-pen"></i></a><a href="./delete/" class="btn btn-danger" style="margin-left: 10px"><i class="fas fa-trash-alt"></i></a><a href="./active/" class="btn btn-secondary" style="margin-left: 10px"><i class="fas fa-times"></i></a>
-			</div>
-			{% endif %}
+				<h1>{{ object.brand }} {{ object.vehicle_model }}
+					{% if object.vehicle_model_other %}{{ object.vehicle_model_other }}{% endif %}</h1>
+				{% if request.user == object.user %}
+				<div id="action_buttons">
+					<a href="./edit/" class="btn btn-info" style="margin-left: 25px"><i class="fas fa-pen"></i></a><a
+						href="./delete/" class="btn btn-danger" style="margin-left: 10px"><i
+							class="fas fa-trash-alt"></i></a><a href="./active/" class="btn btn-secondary"
+						style="margin-left: 10px"><i class="fas fa-times"></i></a>
+				</div>
+				{% endif %}
 			</div>
 			<hr style="margin: 10px 10px 10px 10px">
 			<div id="bodyandprice">
 
-				<div class="outer_div_price"><h5>{{ object.new_used }} {{ object.body_type }} </h5></div>
+				<div class="outer_div_price">
+					<h5>{{ object.new_used }} {{ object.body_type }} </h5>
+				</div>
 
-				<div class="outer_div_price sale_tag_outer"><div id="sale_tag">{% if object.ad_type == "Sale" %}
-				<p style="background: linear-gradient( to bottom right,  rgba(101,204,184,1), rgba(109,236,185,1));">For Sale</p>{% elif object.ad_type == "Buy" %}<p style="background: linear-gradient(to bottom right, #F00851, #7366FF);">Looking to Buy</p>{% endif %}</div></div>
+				<div class="outer_div_price sale_tag_outer">
+					<div id="sale_tag">{% if object.ad_type == "Sale" %}
+						<p
+							style="background: linear-gradient( to bottom right,  rgba(101,204,184,1), rgba(109,236,185,1));">
+							For Sale</p>{% elif object.ad_type == "Buy" %}<p
+							style="background: linear-gradient(to bottom right, #F00851, #7366FF);">Looking to Buy</p>
+						{% endif %}</div>
+				</div>
 				<div class="outer_div_price" id="align_price_content_left">
-				<div id="price"><h4 id="price_price">{% if object.reduced_price %}<s id="original_price">{{ object.price }} €</s> <b id="reduced_price">{{ object.reduced_price }} €</b>{% else %}<b>{{ object.price }} €</b>{% endif %}</h4>{% if object.value_added_tax %}<h6>VAT will be added</h6>{% endif %}</div></div>
+					<div id="price">
+						<h4 id="price_price">{% if object.reduced_price %}<s id="original_price">{{ object.price }}
+								€</s> <b id="reduced_price">{{ object.reduced_price }}
+								€</b>{% else %}<b>{{ object.price }} €</b>{% endif %}</h4>
+						{% if object.value_added_tax %}<h6>VAT will be added</h6>{% endif %}
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="vehicle_images">
@@ -63,14 +84,15 @@
 						<td>{{ object.mileage_km }} km</td>
 					</tr>
 					<tr>
-						<td colspan="2" style="text-align: center;"><i class="fas fa-map-marker-alt"></i> {{ object.location }}</td>
+						<td colspan="2" style="text-align: center;"><i class="fas fa-map-marker-alt"></i>
+							{{ object.location }}</td>
 					</tr>
 				</table>
 				<table id="engine_table">
 					<tr>
 						<th colspan="2">Drivetrain</th>
 					</tr>
-				{% if object.fuel == 'Electric' %}
+					{% if object.fuel == 'Electric' %}
 					<tr>
 						<td>Battery Capacity</td>
 						<td>{{ object.fuel_tank_l }} kWh</td>
@@ -87,14 +109,15 @@
 						<td>Electricity consumption (average)</td>
 						<td>{{ object.fuel_usage_average }} kWh/100km</td>
 					</tr>
-				{% else %}
+					{% else %}
 					<tr>
 						<td>Number of cylinders</td>
 						<td>{% if object.cylinders %}{{ object.cylinders }}{% else %} - {% endif %}</td>
 					</tr>
 					<tr>
 						<td>Displacement</td>
-						<td>{% if object.displacement_cm %}{{ object.displacement_cm }} cm³ {% else %} - {% endif %}</td>
+						<td>{% if object.displacement_cm %}{{ object.displacement_cm }} cm³ {% else %} - {% endif %}
+						</td>
 					</tr>
 					<tr>
 						<td>Fuel tank capacity</td>
@@ -102,17 +125,20 @@
 					</tr>
 					<tr>
 						<td>Fuel usage (urban)</td>
-						<td>{% if object.fuel_usage_city %}{{ object.fuel_usage_city }} l/100km {% else %} - {% endif %}</td>
+						<td>{% if object.fuel_usage_city %}{{ object.fuel_usage_city }} l/100km {% else %} - {% endif %}
+						</td>
 					</tr>
 					<tr>
 						<td>Fuel usage (extra-urban)</td>
-						<td>{% if object.fuel_usage_out %}{{ object.fuel_usage_out }} l/100km {% else %} - {% endif %}</td>
+						<td>{% if object.fuel_usage_out %}{{ object.fuel_usage_out }} l/100km {% else %} - {% endif %}
+						</td>
 					</tr>
 					<tr>
 						<td>Fuel usage (average)</td>
-						<td>{% if object.fuel_usage_average %}{{ object.fuel_usage_average }} l/100km {% else %} - {% endif %}</td>
+						<td>{% if object.fuel_usage_average %}{{ object.fuel_usage_average }} l/100km {% else %} -
+							{% endif %}</td>
 					</tr>
-				
+
 					{% endif %}
 					<tr>
 						<td>Drive</td>
@@ -292,9 +318,9 @@
 			<p class="damage_notice">Vehicle has had an accident!</p>
 			{% endif %}
 		</div>
-				
+
 	</div>
 </div>
-<script src="{% static 'autoad/vehicle_detail.js' %}" type="module"></script> 
+<script src="{% static 'autoad/vehicle_detail.js' %}" type="module"></script>
 <script type="text/javascript" src="{% static 'autoad/slick/slick.min.js' %}"></script>
 {% endblock %}

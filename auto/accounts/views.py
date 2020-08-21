@@ -52,7 +52,8 @@ class LoginView(View):
                     self.my_errors.append('Your user has been supended.')
                     return render(request, self.template_name, {'form': form, 'my_errors': self.my_errors})
             else:
-                self.my_errors.append('User not found. Possible reasons: supension or deleteion of the user, or no such user has been created.')
+                self.my_errors.append(
+                    'User not found. Possible reasons: supension or deleteion of the user, or no such user has been created.')
                 return render(request, self.template_name, {'form': form, 'my_errors': self.my_errors})
             return render(request, self.template_name, {'form': form, 'my_errors': self.my_errors})
 

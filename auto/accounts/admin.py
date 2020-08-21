@@ -6,6 +6,7 @@ from .forms import UserAdminCreationForm, UserAdminChangeForm
 from .models import User
 # Register your models here.
 
+
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
     form = UserAdminChangeForm
@@ -18,7 +19,8 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('admin', 'staff', 'active')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'gender', 'birthday', 'email_verified', 'id_verified')}),
+        ('Personal info', {'fields': ('first_name', 'last_name',
+                                      'gender', 'birthday', 'email_verified', 'id_verified')}),
         ('Permissions', {'fields': ('admin', 'staff', 'active')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -27,15 +29,14 @@ class UserAdmin(BaseUserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': ('email', 'password1', 'password2')}
-        ),
+         ),
     )
-    search_fields = ('email','first_name', 'last_name')
+    search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
     filter_horizontal = ()
 
 
 admin.site.register(User, UserAdmin)
-
 
 
 # Remove Group Model from admin. We're not using it.

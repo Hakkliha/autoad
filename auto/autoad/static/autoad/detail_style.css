@@ -18,10 +18,10 @@ table {
 }
 
 hr {
-  clear: both;
-  display: block;              
-  background-color: darkgrey;
-  height: 1px;
+	clear: both;
+	display: block;
+	background-color: darkgrey;
+	height: 1px;
 }
 
 tr td:nth-child(2) {
@@ -91,7 +91,7 @@ tr td:nth-child(2) {
 	align-items: center;
 }
 
-.outer_div_price {	
+.outer_div_price {
 	width: 33%;
 }
 
@@ -123,13 +123,13 @@ tr td:nth-child(2) {
 
 #price {
 	display: inline-block;
-	text-align: center;}
+	text-align: center;
+}
 
 #price h6 {
 	font-size: 12px;
 	color: darkgrey;
 }
-
 
 #price h4 {
 	margin: 0;
@@ -182,8 +182,8 @@ tr td:nth-child(2) {
 	flex-flow: row nowrap;
 }
 
-.slick-prev:before, .slick-next:before { 
-    color: red !important;
+.slick-prev:before, .slick-next:before {
+	color: red !important;
 }
 
 .slick-prev, .slick-next {

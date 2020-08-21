@@ -11,8 +11,8 @@
 	background-image: url("/media/base_media/home/1.jpg");
 	background-size: cover;
 	background-position: center;
-  	background-repeat: no-repeat;
-  	flex-flow: column nowrap;
+	background-repeat: no-repeat;
+	flex-flow: column nowrap;
 }
 
 #homeview h1 {
