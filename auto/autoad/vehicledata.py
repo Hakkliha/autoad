@@ -1,13 +1,18 @@
 # ('Van','Van'), ('Truck','Truck'), ('Bus','Bus'), ('Mototechnics','Mototechnics'), ('Water vehicles','Water vehicles'), ('Racing vehicles','Racing vehicles'), ('Trailer','Trailer'), ('Caravan','Caravan'), ('Special Vehicles','Special Vehicles'))
 VEHICLE_TYPE_LIST = (('Car', 'Car'),)
 
-BODY_TYPE_CHOICES = (('Saloon', 'Saloon'), ('Cabriolet / Roadster', 'Cabriolet / Roadster'), ('Estate Car', 'Estate Car'), ('Small Car', 'Small Car'), ('Sports Car / Coupe',
-                                                                                                                                                        'Sports Car / Coupe'), ('SUV / Off-road Vehicle', 'SUV / Off-road Vehicle'), ('Van / Minibus', 'Van / Minibus'), ('Pickup Truck', 'Pickup Truck'), ('Other', 'Other'))
+BODY_TYPE_CHOICES = (
+('Saloon', 'Saloon'), ('Cabriolet / Roadster', 'Cabriolet / Roadster'), ('Estate Car', 'Estate Car'),
+('Small Car', 'Small Car'), ('Sports Car / Coupe',
+                             'Sports Car / Coupe'), ('SUV / Off-road Vehicle', 'SUV / Off-road Vehicle'),
+('Van / Minibus', 'Van / Minibus'), ('Pickup Truck', 'Pickup Truck'), ('Other', 'Other'))
 
 NEW_USED_LIST = (('Used', 'Used'), ('New', 'New'))
 
-FUEL_TYPE = (('Petrol', 'Petrol'), ('Diesel', 'Diesel'), ('Electric', 'Electric'), ('Ethanol', 'Ethanol'), ('Hydrib (petrol/electric)', 'Hydrib (petrol/electric)'),
-             ('Hydrib (diesel/electric)', 'Hydrib (diesel/electric)'), ('LPG', 'LPG'), ('Natural Gas', 'Natural Gas'), ('Hydrogen', 'Hydrogen'), ('Other', 'Other'))
+FUEL_TYPE = (('Petrol', 'Petrol'), ('Diesel', 'Diesel'), ('Electric', 'Electric'), ('Ethanol', 'Ethanol'),
+             ('Hydrib (petrol/electric)', 'Hydrib (petrol/electric)'),
+             ('Hydrib (diesel/electric)', 'Hydrib (diesel/electric)'), ('LPG', 'LPG'), ('Natural Gas', 'Natural Gas'),
+             ('Hydrogen', 'Hydrogen'), ('Other', 'Other'))
 
 TRANSMISSION_TYPE = (('Automatic', 'Automatic'),
                      ('Semi-Automatic', 'Semi-Automatic'), ('Manual', 'Manual'))

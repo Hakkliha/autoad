@@ -1,9 +1,9 @@
 import django_filters
+
 from .models import Vehicle
 
 
 class VehicleFilter(django_filters.FilterSet):
-
     CHOICES = (
         ('price_ascending', 'Price Ascending'),
         ('price_descending', 'Price Descending'),

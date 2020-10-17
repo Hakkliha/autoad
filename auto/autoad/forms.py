@@ -1,17 +1,13 @@
 from django import forms
 
-from .models import Vehicle, year_choices, current_year, current_today, current_month
-from django.core import validators
-from django.core.exceptions import ValidationError
-
-from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_USED_LIST, FUEL_TYPE, TRANSMISSION_TYPE, DRIVE_TYPE, STEERINGWHEEL_POSITION, COUNTRY_OF_ORIGIN_LIST,
+from .models import Vehicle, year_choices, current_year
+from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_USED_LIST, FUEL_TYPE, TRANSMISSION_TYPE,
+                          DRIVE_TYPE, STEERINGWHEEL_POSITION, COUNTRY_OF_ORIGIN_LIST,
                           O_CONDITION_LIST,
                           T_CONDITION_LIST,
                           I_CONDITION_LIST,
                           AD_TYPE_LIST
                           )
-
-from django.conf import settings
 
 
 class VehicleForm(forms.ModelForm):

@@ -7,7 +7,8 @@ from autoad.views import (
     VehicleDeleteView,
     VehicleChangeActiveView,
     VehicleImagesView,
-    VehicleHomeView
+    VehicleHomeView,
+    ModelGenerationView
 )
 
 app_name = 'autoad'
@@ -21,4 +22,5 @@ urlpatterns = [
          name='vehicle-active'),
     path('<int:pk>/edit/', VehicleUpdateView.as_view(), name='vehicle-edit'),
     path('<int:pk>/delete/', VehicleDeleteView.as_view(), name='vehicle-delete'),
+    #path('generate/', ModelGenerationView.as_view(), name='vehicle-model-gen')
 ]

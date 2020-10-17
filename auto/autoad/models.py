@@ -1,20 +1,19 @@
+import datetime
+import os
+import shutil
+
+from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.urls import reverse
-from django.core.validators import MaxValueValidator, MinValueValidator
-from django.template.defaultfilters import slugify
-#from django.contrib.gis.utils import GeoIP
-import datetime
-import shutil
-import os
-from django.conf import settings
 
-from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_USED_LIST, FUEL_TYPE, TRANSMISSION_TYPE, DRIVE_TYPE, STEERINGWHEEL_POSITION, COUNTRY_OF_ORIGIN_LIST,
+from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_USED_LIST, FUEL_TYPE, TRANSMISSION_TYPE,
+                          DRIVE_TYPE, STEERINGWHEEL_POSITION, COUNTRY_OF_ORIGIN_LIST,
                           O_CONDITION_LIST,
                           T_CONDITION_LIST,
                           I_CONDITION_LIST,
                           AD_TYPE_LIST
                           )
-
 
 '''def get_location():
 	g = GeoIP()
@@ -26,7 +25,7 @@ from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_
 
 
 def year_choices():
-    return [(r, r) for r in range(1884, datetime.date.today().year+2)]
+    return [(r, r) for r in range(1884, datetime.date.today().year + 2)]
 
 
 def current_year():
@@ -43,6 +42,7 @@ def current_month():
         return f'0{month}'
     else:
         return month
+
 
 # Create your models here.
 

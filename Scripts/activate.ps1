@@ -27,6 +27,7 @@ function global:pydoc {
     python -m pydoc $args
 }
 
+
 # unset irrelevant variables
 deactivate -nondestructive
 

@@ -15,7 +15,6 @@ with open('Modellist.csv', 'r', encoding='utf-8-sig') as csv_file:
 				elif line[0] != '':
 					csv_writer.write(line[0].upper().replace(' ', '') + '_MODEL_LIST = (')		
 
-
 with open('Modellist.csv', 'r') as csv_file:
 	csv_reader = csv.reader(csv_file)
 

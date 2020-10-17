@@ -1,26 +1,26 @@
 .inputfield {
-	margin-bottom: 20px;
-	margin-left: 50px;
+    margin-bottom: 20px;
+    margin-left: 50px;
 }
 
 .fuelcells_style {
-	display: flex;
-	flex-flow: row nowrap;
-	height: 28px;
+    display: flex;
+    flex-flow: row nowrap;
+    height: 28px;
 }
 
 .fuelcells_style p {
-	margin-left: 5px;
+    margin-left: 5px;
 }
 
 .equipment_selection_field {
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 #errors_list {
-	padding: 10px;
-	border: 3px solid red;
-	border-radius: 5px;
-	margin: 10px;
-	list-style: none;
+    padding: 10px;
+    border: 3px solid #ff0000;
+    border-radius: 5px;
+    margin: 10px;
+    list-style: none;
 }
