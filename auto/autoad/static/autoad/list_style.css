@@ -13,11 +13,17 @@ body {
 	align-self: center;
 }
 
-.listitem {
+.list-item {
 	width: 100%;
 	display: flex;
 	flex-flow: row nowrap;
 	padding-left: 20px;
+}
+
+.list-item img {
+	height: 150px;
+	width: 250px;
+	object-fit: cover;
 }
 
 .details_area {
@@ -29,7 +35,7 @@ body {
 	padding: 20px;
 }
 
-.searchbox {
+.search-box {
 	background: linear-gradient(rgba(133, 188, 213, 0.45), rgba(183, 215, 230, 0.45));
 	padding: 20px;
 	border-radius: 10px;
@@ -50,13 +56,24 @@ table tr {
 	font-size: 15px;
 }
 
-.vehicle_details {
+.vehicle-details {
 	height: 150px;
 	width: 100%;
 	display: flex;
 	flex-flow: column wrap;
 }
 
-.vehicle_details h5 {
+.vehicle-details h5 {
 	padding: 5px;
+}
+
+@media only screen and (max-aspect-ratio: 10/10) {
+	.list-item h3, .list-item h4, .list-item h5{
+		font-size: 15px;
+		padding: 1px;
+	}
+ 	.list-item img {
+		width: 40%;
+		height: 100px;
+	}
 }

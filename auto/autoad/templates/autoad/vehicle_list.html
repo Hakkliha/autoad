@@ -12,7 +12,7 @@
 {% block content %}
 <div id="main_content">
 	<form method="GET" id="searchbar">
-		<div class="searchbox">
+		<div class="search-box">
 			<table>
 				<tr>
 					<td>Vehicle make</td>
@@ -64,14 +64,13 @@
 		{% if instance.active %}
 		<div>
 			<a href='{{ instance.get_absolute_url }}'>
-				<div class="listitem">
-					<img context="{{ instance.pictures }}" id="ad_cover{{ forloop.counter }}"
-						style="height: 150px; width: 250px; object-fit: cover;" class="list_item_image">
+				<div class="list-item">
+					<img context="{{ instance.pictures }}" id="ad_cover{{ forloop.counter }}" class="list_item_image">
 					<div class="details_area">
 						<h3>{{ instance.brand }} {{ instance.vehicle_model }}
 							{% if instance.vehicle_model_other %}{{ instance.vehicle_model_other }}{% endif %}
 							{{ instance.vehicle_model_year }} </h3>
-						<div class="vehicle_details">
+						<div class="vehicle-details">
 							<h5>{{ instance.power_kw }} kW</h5>
 							<h5>{{ instance.fuel }}</h5>
 							<h5 class="mileage"><b style="font-weight: inherit;">{{ instance.mileage_km }}</b> km</h5>

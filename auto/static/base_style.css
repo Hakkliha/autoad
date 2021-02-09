@@ -28,3 +28,9 @@ footer {
 	position: static;
 	background: white;
 }
+
+@media only screen and (max-device-width: 480px) {
+ nav a b {
+	 display: none;
+ }
+}
