@@ -1,8 +1,10 @@
 import {equipment_array} from './equipment_file.js';
+import * as car_list from './model_list_file.js';
 
 $(document).ready(function () {
+    
     let brand = $("#id_brand").val().toUpperCase().replace(' ', '').replace('-', '_');
-    let list_name = eval(brand + '_MODEL_LIST');
+    let list_name = eval('car_list.' + brand + '_MODEL_LIST');
     let model_content = "";
 
     for (let i = 1; i < list_name.length; i++) {
@@ -51,7 +53,6 @@ $(document).ready(function () {
 
 
 $("#final_submit").click(function () {
-    console.log("MONKEY");
     let e_content = "";
     for (let i = 0; i < equipment_array.length; i++) {
         if (i === 0) {
@@ -84,7 +85,7 @@ $("#final_submit").click(function () {
 
 $("#id_brand").click(function () {
     let brand = $("#id_brand").val().toUpperCase().replace(' ', '').replace('-', '_');
-    let list_name = eval(brand + '_MODEL_LIST');
+    let list_name = eval('car_list.' + brand + '_MODEL_LIST');
     let model_content = "";
     for (let i = 1; i < list_name.length; i++) {
         model_content += '<option value="' + list_name[i] + '">' + list_name[i] + '</option>'

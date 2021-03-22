@@ -103,6 +103,7 @@ class VehicleCreateView(View):
     my_errors = []
 
     def get(self, request, *args, **kwargs):
+        print(request.session.session_key)
         if not request.user.is_authenticated:
             print('Not logged in')
             return redirect('../')

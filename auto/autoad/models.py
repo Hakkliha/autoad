@@ -139,7 +139,6 @@ class Vehicle(models.Model):
         ordering = ('creation_datetime', 'price',)
 
     def delete(self, *args, **kwargs):
-        print(self.pictures[9:30])
         shutil.rmtree(os.path.join(settings.MEDIA_ROOT,
                                    self.pictures[9:30]), ignore_errors=True)
         super().delete(*args, **kwargs)
