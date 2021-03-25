@@ -1,23 +1,6 @@
 import {equipment_array} from './equipment_file.js';
-import * as car_list from './model_list_file.js';
 
 $(document).ready(function () {
-    
-    let brand = $("#id_brand").val().toUpperCase().replace(' ', '').replace('-', '_');
-    let list_name = eval('car_list.' + brand + '_MODEL_LIST');
-    let model_content = "";
-
-    for (let i = 1; i < list_name.length; i++) {
-        model_content += '<option value="' + list_name[i] + '">' + list_name[i] + '</option>'
-    }
-
-    model_content = $.parseHTML(model_content);
-    $("#vehicle_model").html(model_content);
-    if ($("#id_vehicle_model").val() !== "") {
-        $("#vehicle_model").val($("#id_vehicle_model").val());
-    } else {
-        $("#id_vehicle_model").val($("#vehicle_model").val());
-    }
 
 
     let equipment_field = $("#equipment_choice_field");
@@ -83,27 +66,6 @@ $("#final_submit").click(function () {
 });
 
 
-$("#id_brand").click(function () {
-    let brand = $("#id_brand").val().toUpperCase().replace(' ', '').replace('-', '_');
-    let list_name = eval('car_list.' + brand + '_MODEL_LIST');
-    let model_content = "";
-    for (let i = 1; i < list_name.length; i++) {
-        model_content += '<option value="' + list_name[i] + '">' + list_name[i] + '</option>'
-    }
-
-    model_content = $.parseHTML(model_content);
-    $("#vehicle_model").html(model_content);
-});
-
-$("#vehicle_model").click(function () {
-    let modelname = $("#vehicle_model").val();
-    $("#id_vehicle_model").val(modelname);
-});
-
-$("#id_vehicle_type").click(function () {
-    let vehicle_type = $("#id_vehicle_type").val();
-});
-
 $("#id_fuel").click(function () {
     let fuel = $("#id_fuel").val();
     if (fuel === 'Electric') {
@@ -130,9 +92,9 @@ $(".average_consumption_field").click(function () {
 });
 
 $("#id_is_import").change(function () {
-    let importaffected = $(".importaffected").toggleClass("d-none");
+    $(".importaffected").toggleClass("d-none");
 });
 
 $("#id_customisation").change(function () {
-    let customisationaffected = $(".customisationaffected").toggleClass("d-none");
+    $(".customisationaffected").toggleClass("d-none");
 });

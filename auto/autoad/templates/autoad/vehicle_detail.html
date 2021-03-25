@@ -1,326 +1,335 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{% load static %}
-<title>{{ object.brand }} {{ object.vehicle_model }}
-	{% if object.vehicle_model_other %}{{ object.vehicle_model_other }}{% endif %}{{ object.vehicle_model_year }}
-</title>
-<link rel="stylesheet" type="text/css" href="{% static 'autoad/detail_style.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'autoad/slick/slick.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'autoad/slick/slick-theme.css' %}" />
+    {% load static %}
+    <title>{{ object.brand }} {{ object.vehicle_model }}
+        {% if object.vehicle_model_other %}{{ object.vehicle_model_other }}{% endif %}{{ object.vehicle_model_year }}
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'autoad/detail_style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'autoad/slick/slick.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'autoad/slick/slick-theme.css' %}"/>
 {% endblock %}
 
 {% block content %}
-<div id="main_container">
-	<div id="vehicle_display">
-		<div id="name_div">
-			{% if not object.active %}<div class="active_banner"><i class="fas fa-exclamation-circle"></i> This advert
-				is inactive</div>{% endif %}
-			<div id="vehicle_name">
-				<h1>{{ object.brand }} {{ object.vehicle_model }}
-					{% if object.vehicle_model_other %}{{ object.vehicle_model_other }}{% endif %}</h1>
-				{% if request.user == object.user %}
-				<div id="action_buttons">
-					<a href="./edit/" class="btn btn-info" style="margin-left: 25px"><i class="fas fa-pen"></i></a><a
-						href="./delete/" class="btn btn-danger" style="margin-left: 10px"><i
-							class="fas fa-trash-alt"></i></a><a href="./active/" class="btn btn-secondary"
-						style="margin-left: 10px"><i class="fas fa-times"></i></a>
-				</div>
-				{% endif %}
-			</div>
-			<hr style="margin: 10px 10px 10px 10px">
-			<div id="bodyandprice">
+    <div id="main_container">
+        <div id="vehicle_display">
+            <div id="name_div">
+                {% if not object.active %}
+                    <div class="active_banner"><i class="fas fa-exclamation-circle"></i> This advert
+                        is inactive
+                    </div>{% endif %}
+                <div id="vehicle_name">
+                    <h1>{{ object.brand }} {% if object.vehicle_submodel %}{{ object.vehicle_submodel }}{% else %}
+                        {{ object.vehicle_model }} {% endif %}
+                        {% if object.vehicle_model_other %}{{ object.vehicle_model_other }}{% endif %}</h1>
+                    {% if request.user == object.user %}
+                        <div id="action_buttons">
+                            <a href="./edit/" class="btn btn-info" style="margin-left: 25px"><i class="fas fa-pen"></i></a><a
+                                href="./delete/" class="btn btn-danger" style="margin-left: 10px"><i
+                                class="fas fa-trash-alt"></i></a><a href="./active/" class="btn btn-secondary"
+                                                                    style="margin-left: 10px"><i
+                                class="fas fa-times"></i></a>
+                        </div>
+                    {% endif %}
+                </div>
+                <hr style="margin: 10px 10px 10px 10px">
+                <div id="bodyandprice">
 
-				<div class="outer_div_price">
-					<h5>{{ object.new_used }} {{ object.body_type }} </h5>
-				</div>
+                    <div class="outer_div_price">
+                        <h5>{{ object.new_used }} {{ object.body_type }} </h5>
+                    </div>
 
-				<div class="outer_div_price sale_tag_outer">
-					<div id="sale_tag">{% if object.ad_type == "Sale" %}
-						<p
-							style="background: linear-gradient( to bottom right,  rgba(101,204,184,1), rgba(109,236,185,1));">
-							For Sale</p>{% elif object.ad_type == "Buy" %}<p
-							style="background: linear-gradient(to bottom right, #F00851, #7366FF);">Looking to Buy</p>
-						{% endif %}</div>
-				</div>
-				<div class="outer_div_price" id="align_price_content_left">
-					<div id="price">
-						<h4 id="price_price">{% if object.reduced_price %}<s id="original_price">{{ object.price }}
-								€</s> <b id="reduced_price">{{ object.reduced_price }}
-								€</b>{% else %}<b>{{ object.price }} €</b>{% endif %}</h4>
-						{% if object.value_added_tax %}<h6>VAT will be added</h6>{% endif %}
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="vehicle_images">
-			<p class="d-none" id="images_source">{{ object.pictures }}</p>
-			<div id="other_pictures"></div>
-		</div>
-		<div id="vehicle_details" class="col-12">
-			<div id="info_tables">
-				<table id="general_table">
-					<tr>
-						<th colspan="2">General</th>
-					</tr>
-					<tr>
-						<td>Power</td>
-						<td>{{ object.power_kw }} kW</td>
-					</tr>
-					<tr>
-						<td>Year</td>
-						<td>{{ object.vehicle_model_year }}</td>
-					</tr>
-					<tr>
-						<td>Transmission</td>
-						<td>{{ object.transmission }}</td>
-					</tr>
-					<tr>
-						<td>Fuel type</td>
-						<td>{{ object.fuel }}</td>
-					</tr>
-					<tr>
-						<td>Mileage</td>
-						<td>{{ object.mileage_km }} km</td>
-					</tr>
-					<tr>
-						<td colspan="2" style="text-align: center;"><i class="fas fa-map-marker-alt"></i>
-							{{ object.location }}</td>
-					</tr>
-				</table>
-				<table id="engine_table">
-					<tr>
-						<th colspan="2">Drivetrain</th>
-					</tr>
-					{% if object.fuel == 'Electric' %}
-					<tr>
-						<td>Battery Capacity</td>
-						<td>{{ object.fuel_tank_l }} kWh</td>
-					</tr>
-					<tr>
-						<td>Electricity consumption (city)</td>
-						<td>{{ object.fuel_usage_city }} kWh/100km</td>
-					</tr>
-					<tr>
-						<td>Electricity consumption (outside of city)</td>
-						<td>{{ object.fuel_usage_out }} kWh/100km</td>
-					</tr>
-					<tr>
-						<td>Electricity consumption (average)</td>
-						<td>{{ object.fuel_usage_average }} kWh/100km</td>
-					</tr>
-					{% else %}
-					<tr>
-						<td>Number of cylinders</td>
-						<td>{% if object.cylinders %}{{ object.cylinders }}{% else %} - {% endif %}</td>
-					</tr>
-					<tr>
-						<td>Displacement</td>
-						<td>{% if object.displacement_cm %}{{ object.displacement_cm }} cm³ {% else %} - {% endif %}
-						</td>
-					</tr>
-					<tr>
-						<td>Fuel tank capacity</td>
-						<td>{% if object.fuel_tank_l %}{{ object.fuel_tank_l }} l {% else %} - {% endif %}</td>
-					</tr>
-					<tr>
-						<td>Fuel usage (urban)</td>
-						<td>{% if object.fuel_usage_city %}{{ object.fuel_usage_city }} l/100km {% else %} - {% endif %}
-						</td>
-					</tr>
-					<tr>
-						<td>Fuel usage (extra-urban)</td>
-						<td>{% if object.fuel_usage_out %}{{ object.fuel_usage_out }} l/100km {% else %} - {% endif %}
-						</td>
-					</tr>
-					<tr>
-						<td>Fuel usage (average)</td>
-						<td>{% if object.fuel_usage_average %}{{ object.fuel_usage_average }} l/100km {% else %} -
-							{% endif %}</td>
-					</tr>
+                    <div class="outer_div_price sale_tag_outer">
+                        <div id="sale_tag">{% if object.ad_type == "Sale" %}
+                            <p
+                                    style="background: linear-gradient( to bottom right,  rgba(101,204,184,1), rgba(109,236,185,1));">
+                                For Sale</p>{% elif object.ad_type == "Buy" %}<p
+                                    style="background: linear-gradient(to bottom right, #F00851, #7366FF);">Looking to
+                                Buy</p>
+                        {% endif %}</div>
+                    </div>
+                    <div class="outer_div_price" id="align_price_content_left">
+                        <div id="price">
+                            <h4 id="price_price">{% if object.reduced_price %}<s id="original_price">{{ object.price }}
+                                €</s> <b id="reduced_price">{{ object.reduced_price }}
+                                €</b>{% else %}<b>{{ object.price }} €</b>{% endif %}</h4>
+                            {% if object.value_added_tax %}<h6>VAT will be added</h6>{% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="vehicle_images">
+                <p class="d-none" id="images_source">{{ object.pictures }}</p>
+                <div id="other_pictures"></div>
+            </div>
+            <div id="vehicle_details" class="col-12">
+                <div id="info_tables">
+                    <table id="general_table">
+                        <tr>
+                            <th colspan="2">General</th>
+                        </tr>
+                        <tr>
+                            <td>Power</td>
+                            <td>{{ object.power_kw }} kW</td>
+                        </tr>
+                        <tr>
+                            <td>Year</td>
+                            <td>{{ object.vehicle_model_year }}</td>
+                        </tr>
+                        <tr>
+                            <td>Transmission</td>
+                            <td>{{ object.transmission }}</td>
+                        </tr>
+                        <tr>
+                            <td>Fuel type</td>
+                            <td>{{ object.fuel }}</td>
+                        </tr>
+                        <tr>
+                            <td>Mileage</td>
+                            <td>{{ object.mileage_km }} km</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center;"><i class="fas fa-map-marker-alt"></i>
+                                {{ object.location }}</td>
+                        </tr>
+                    </table>
+                    <table id="engine_table">
+                        <tr>
+                            <th colspan="2">Drivetrain</th>
+                        </tr>
+                        {% if object.fuel == 'Electric' %}
+                            <tr>
+                                <td>Battery Capacity</td>
+                                <td>{{ object.fuel_tank_l }} kWh</td>
+                            </tr>
+                            <tr>
+                                <td>Electricity consumption (city)</td>
+                                <td>{{ object.fuel_usage_city }} kWh/100km</td>
+                            </tr>
+                            <tr>
+                                <td>Electricity consumption (outside of city)</td>
+                                <td>{{ object.fuel_usage_out }} kWh/100km</td>
+                            </tr>
+                            <tr>
+                                <td>Electricity consumption (average)</td>
+                                <td>{{ object.fuel_usage_average }} kWh/100km</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>Number of cylinders</td>
+                                <td>{% if object.cylinders %}{{ object.cylinders }}{% else %} - {% endif %}</td>
+                            </tr>
+                            <tr>
+                                <td>Displacement</td>
+                                <td>{% if object.displacement_cm %}{{ object.displacement_cm }} cm³ {% else %}
+                                    - {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Fuel tank capacity</td>
+                                <td>{% if object.fuel_tank_l %}{{ object.fuel_tank_l }} l {% else %} - {% endif %}</td>
+                            </tr>
+                            <tr>
+                                <td>Fuel usage (urban)</td>
+                                <td>{% if object.fuel_usage_city %}{{ object.fuel_usage_city }} l/100km {% else %}
+                                    - {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Fuel usage (extra-urban)</td>
+                                <td>{% if object.fuel_usage_out %}{{ object.fuel_usage_out }} l/100km {% else %}
+                                    - {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Fuel usage (average)</td>
+                                <td>{% if object.fuel_usage_average %}{{ object.fuel_usage_average }} l/100km {% else %}
+                                    -
+                                {% endif %}</td>
+                            </tr>
 
-					{% endif %}
-					<tr>
-						<td>Drive</td>
-						<td>{{ object.drive }}</td>
-					</tr>
-				</table>
-				<table>
-					<tr>
-						<th colspan="2">Miscellaneous</th>
-					</tr>
-					<tr>
-						<td>Warranty until</td>
-						<td>{% if object.warranty_until %}{{ object.warranty_until }}{% else %} - {% endif %}</td>
-					</tr>
-					<tr>
-						<td>Insurance until</td>
-						<td>{% if object.insurance_until %}{{ object.insurance_until }}{% else %} - {% endif %}</td>
-					</tr>
-					<tr>
-						<td>MOT until</td>
-						<td>{% if object.valid_mot_until %}{{ object.valid_mot_until }}{% else %} - {% endif %}</td>
-					</tr>
-					<tr>
-						<td>Full service history</td>
-						<td>{% if object.service_history_bk %}Available{% else %}Not available{% endif %}</td>
-					</tr>
-					<tr>
-						<td>Number of previous owners</td>
-						<td>{{ object.nr_owner }}</td>
-					</tr>
-					<tr>
-						<td>Number of Doors</td>
-						<td>{{ object.doors }}</td>
-					</tr>
-					<tr>
-						<td>Number of Seats</td>
-						<td>{{ object.seats }}</td>
-					</tr>
-					<tr>
-						<td>Steeringwheel poition</td>
-						<td>{{ object.steeringwheel }}</td>
-					</tr>
-					<tr>
-						<td>Optical condition</td>
-						<td>{{ object.optical_condition }}</td>
-					</tr>
-					<tr>
-						<td>Technical condition</td>
-						<td>{{ object.technical_condition }}</td>
-					</tr>
-					<tr>
-						<td>Interior condition</td>
-						<td>{{ object.interior_condition }}</td>
-					</tr>
-				</table>
-				<table id="reg_table">
-					<tr>
-						<th colspan="2">Registration</th>
-					</tr>
-					{% if object.vin_code  %}
-					<tr>
-						<td>VIN Number</td>
-						<td style="width: 300px">{{ object.vin_code }}</td>
-					</tr>
-					{% else %}
-					<tr>
-						<td>VIN Number</td>
-						<td style="text-align: center;">Not available</td>
-					</tr>
-					{% endif %}
-					{% if object.numberplate  %}
-					<tr>
-						<td>Numberplate</td>
-						<td>{{ object.numberplate }}</td>
-					</tr>
-					{% else %}
-					<tr>
-						<td>Numberplate</td>
-						<td style="text-align: center;">Not available</td>
-					</tr>
-					{% endif %}
-				</table>
-				<!--Add if import statement-->
-				<table id="import_table">
-					<tr>
-						<th colspan="2">Import information</th>
-					</tr>
-					{% if object.is_import == True %}
-					<tr>
-						<td>Date of import</td>
-						<td>{{ object.date_of_import }}</td>
-					</tr>
-					<tr>
-						<td>Country of origin</td>
-						<td>{{ object.country_of_origin }}</td>
-					</tr>
-					{% else %}
-					<tr>
-						<td colspan="2" style="text-align: center;">Vehicle has not been imported</td>
-					</tr>
-					{% endif %}
-				</table>
-				<table id="service_table">
-					<tr>
-						<th colspan="2">Service information</th>
-					</tr>
-					{% if object.last_service_date %}
-					<tr>
-						<td>Date of last service</td>
-						<td>{{ object.last_service_date }}</td>
-					</tr>
-					<tr>
-						<td>Last service description</td>
-						<td>{{ object.last_service_desc }}</td>
-					</tr>
-					{% else %}
-					<tr>
-						<td colspan="2" style="text-align: center;">None avaialable</td>
-					</tr>
-					{% endif %}
-				</table>
-				<table id="equipment_table">
-					<tr>
-						<th>Equipment</th>
-					</tr>
-					<tr class="d-none">
-						<td id="equipment_equipment" class="d-none">{{ object.equipment }}</td>
-					</tr>
-					<tr>
-						<td id="equipment_list_field"></td>
-					</tr>
-				</table>
-				<!--Add if customised statement-->
-				<table id="customised_table">
-					<tr>
-						<th>Customization information</th>
-					</tr>
-					{% if object.customisation %}
-					<tr>
-						<td>{{ object.customisation_desc }}</td>
-					</tr>
-					{% else %}
-					<tr>
-						<td>Vehicle has not been customized</td>
-					</tr>
-					{% endif %}
-				</table>
-				<table id="description_table">
-					<tr>
-						<th>Vehicle description</th>
-					</tr>
-					{% if object.vehicle_desc != '' %}
-					<tr>
-						<td>{{ object.vehicle_desc }}</td>
-					</tr>
-					{% else %}
-					<tr>
-						<td>Not available</td>
-					</tr>
-					{% endif %}
-				</table>
-				<table>
-					<tr>
-						<th colspan="2" style="text-align: center;">Contact</th>
-					</tr>
-					<tr>
-						<td style="text-align: center;">E-Mail</td>
-						<td>{{ object.user.email }}</td>
-					</tr>
-				</table>
-			</div>
-			{% if object.damaged is True %}
-			<p class="damage_notice">Vehicle is damaged!</p>
-			{% endif %}
+                        {% endif %}
+                        <tr>
+                            <td>Drive</td>
+                            <td>{{ object.drive }}</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th colspan="2">Miscellaneous</th>
+                        </tr>
+                        <tr>
+                            <td>Warranty until</td>
+                            <td>{% if object.warranty_until %}{{ object.warranty_until }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr>
+                            <td>Insurance until</td>
+                            <td>{% if object.insurance_until %}{{ object.insurance_until }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr>
+                            <td>MOT until</td>
+                            <td>{% if object.valid_mot_until %}{{ object.valid_mot_until }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr>
+                            <td>Full service history</td>
+                            <td>{% if object.service_history_bk %}Available{% else %}Not available{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <td>Number of previous owners</td>
+                            <td>{{ object.nr_owner }}</td>
+                        </tr>
+                        <tr>
+                            <td>Number of Doors</td>
+                            <td>{{ object.doors }}</td>
+                        </tr>
+                        <tr>
+                            <td>Number of Seats</td>
+                            <td>{{ object.seats }}</td>
+                        </tr>
+                        <tr>
+                            <td>Steeringwheel poition</td>
+                            <td>{{ object.steeringwheel }}</td>
+                        </tr>
+                        <tr>
+                            <td>Optical condition</td>
+                            <td>{{ object.optical_condition }}</td>
+                        </tr>
+                        <tr>
+                            <td>Technical condition</td>
+                            <td>{{ object.technical_condition }}</td>
+                        </tr>
+                        <tr>
+                            <td>Interior condition</td>
+                            <td>{{ object.interior_condition }}</td>
+                        </tr>
+                    </table>
+                    <table id="reg_table">
+                        <tr>
+                            <th colspan="2">Registration</th>
+                        </tr>
+                        {% if object.vin_code %}
+                            <tr>
+                                <td>VIN Number</td>
+                                <td style="width: 300px">{{ object.vin_code }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>VIN Number</td>
+                                <td style="text-align: center;">Not available</td>
+                            </tr>
+                        {% endif %}
+                        {% if object.numberplate %}
+                            <tr>
+                                <td>Numberplate</td>
+                                <td>{{ object.numberplate }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>Numberplate</td>
+                                <td style="text-align: center;">Not available</td>
+                            </tr>
+                        {% endif %}
+                    </table>
+                    <!--Add if import statement-->
+                    <table id="import_table">
+                        <tr>
+                            <th colspan="2">Import information</th>
+                        </tr>
+                        {% if object.is_import == True %}
+                            <tr>
+                                <td>Date of import</td>
+                                <td>{{ object.date_of_import }}</td>
+                            </tr>
+                            <tr>
+                                <td>Country of origin</td>
+                                <td>{{ object.country_of_origin }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="2" style="text-align: center;">Vehicle has not been imported</td>
+                            </tr>
+                        {% endif %}
+                    </table>
+                    <table id="service_table">
+                        <tr>
+                            <th colspan="2">Service information</th>
+                        </tr>
+                        {% if object.last_service_date %}
+                            <tr>
+                                <td>Date of last service</td>
+                                <td>{{ object.last_service_date }}</td>
+                            </tr>
+                            <tr>
+                                <td>Last service description</td>
+                                <td>{{ object.last_service_desc }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="2" style="text-align: center;">None avaialable</td>
+                            </tr>
+                        {% endif %}
+                    </table>
+                    <table id="equipment_table">
+                        <tr>
+                            <th>Equipment</th>
+                        </tr>
+                        <tr class="d-none">
+                            <td id="equipment_equipment" class="d-none">{{ object.equipment }}</td>
+                        </tr>
+                        <tr>
+                            <td id="equipment_list_field"></td>
+                        </tr>
+                    </table>
+                    <!--Add if customised statement-->
+                    <table id="customised_table">
+                        <tr>
+                            <th>Customization information</th>
+                        </tr>
+                        {% if object.customisation %}
+                            <tr>
+                                <td>{{ object.customisation_desc }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>Vehicle has not been customized</td>
+                            </tr>
+                        {% endif %}
+                    </table>
+                    <table id="description_table">
+                        <tr>
+                            <th>Vehicle description</th>
+                        </tr>
+                        {% if object.vehicle_desc != '' %}
+                            <tr>
+                                <td>{{ object.vehicle_desc }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>Not available</td>
+                            </tr>
+                        {% endif %}
+                    </table>
+                    <table>
+                        <tr>
+                            <th colspan="2" style="text-align: center;">Contact</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">E-Mail</td>
+                            <td>{{ object.user.email }}</td>
+                        </tr>
+                    </table>
+                </div>
+                {% if object.damaged is True %}
+                    <p class="damage_notice">Vehicle is damaged!</p>
+                {% endif %}
 
-			{% if object.accident is True %}
-			<p class="damage_notice">Vehicle has had an accident!</p>
-			{% endif %}
-		</div>
+                {% if object.accident is True %}
+                    <p class="damage_notice">Vehicle has had an accident!</p>
+                {% endif %}
+            </div>
 
-	</div>
-</div>
-<script src="{% static 'autoad/vehicle_detail.js' %}" type="module"></script>
-<script type="text/javascript" src="{% static 'autoad/slick/slick.min.js' %}"></script>
+        </div>
+    </div>
+    <script src="{% static 'autoad/vehicle_detail.js' %}" type="module"></script>
+    <script type="text/javascript" src="{% static 'autoad/slick/slick.min.js' %}"></script>
 {% endblock %}

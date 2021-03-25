@@ -1,70 +1,74 @@
 {% extends "base.html" %}
 
 {% block title %}
-{% load static %}
-	<title>Register</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'accounts/register_style.css' %}">
+    {% load static %}
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/register_style.css' %}">
 {% endblock %}
 
 {% block content %}
-<center style="min-height: 750px;">
-    <h1>Register</h1>
-    <form method='POST'> {% csrf_token %}
-    	<table style="margin-bottom: 10px;">
-    		<tr>
-    			<td>First name</td>
-    			<td>{{ form.first_name }}</td>
-    		</tr>
-    		<tr>
-    			<td>Last name</td>
-    			<td>{{ form.last_name }}</td>
-    		</tr>
-    		<tr>
-    			<td>Gernder</td>
-    			<td>{{ form.gender }}</td>
-    		</tr>
-    		<tr>
-    			<td>Date of birth</td>
-    			<td><div class="input-group date" id="datetimepicker1" data-target-input="nearest">{{ form.birthday }}<div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-				    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-				  </div>
-				</div></td>
-    		</tr>
-    		<tr>
-    			<td>E-mail</td>
-    			<td>{{ form.email }}</td>
-    		</tr>
-    		<tr>
-    			<td>Password</td>
-    			<td>{{ form.password1 }}</td>
-    		</tr>
-    		<tr>
-    			<td>Repeat password</td>
-    			<td>{{ form.password2 }}</td>
-    		</tr>
-    	</table>
-      <button type='submit' class='btn btn-primary'>Sign up</button>
-    </form>
-</center>
-<script>
-  $(function () {
-    $("#datetimepicker1").datetimepicker({
-      format: 'DD-MM-YYYY',
-    });
-  });
- </script>
- <style type="text/css">
- 	tr {
-	width: 500px;
-	}
+    <center style="min-height: 750px;">
+        <h1>Register</h1>
+        <form method='POST'> {% csrf_token %}
+            <table style="margin-bottom: 10px;">
+                <tr>
+                    <td>First name</td>
+                    <td>{{ form.first_name }}</td>
+                </tr>
+                <tr>
+                    <td>Last name</td>
+                    <td>{{ form.last_name }}</td>
+                </tr>
+                <tr>
+                    <td>Gernder</td>
+                    <td>{{ form.gender }}</td>
+                </tr>
+                <tr>
+                    <td>Date of birth</td>
+                    <td>
+                        <div class="input-group date" id="datetimepicker1"
+                             data-target-input="nearest">{{ form.birthday }}
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>E-mail</td>
+                    <td>{{ form.email }}</td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>{{ form.password1 }}</td>
+                </tr>
+                <tr>
+                    <td>Repeat password</td>
+                    <td>{{ form.password2 }}</td>
+                </tr>
+            </table>
+            <button type='submit' class='btn btn-primary'>Sign up</button>
+        </form>
+    </center>
+    <script>
+        $(function () {
+            $("#datetimepicker1").datetimepicker({
+                format: 'DD-MM-YYYY',
+            });
+        });
+    </script>
+    <style type="text/css">
+        tr {
+            width: 500px;
+        }
 
-	td {
-		width: 50%;
-		padding: 10px 0;
-	}
+        td {
+            width: 50%;
+            padding: 10px 0;
+        }
 
-	td input, td select {
-		width: 200px;
-	}
- </style>
+        td input, td select {
+            width: 200px;
+        }
+    </style>
 {% endblock %}

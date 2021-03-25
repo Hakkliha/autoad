@@ -1,9 +1,11 @@
 from django.contrib import admin
-from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import Group
 
 from .forms import UserAdminCreationForm, UserAdminChangeForm
 from .models import User
+
+
 # Register your models here.
 
 
@@ -37,7 +39,6 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
-
 
 # Remove Group Model from admin. We're not using it.
 admin.site.unregister(Group)

@@ -7,7 +7,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.urls import reverse
 
-from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_USED_LIST, FUEL_TYPE, TRANSMISSION_TYPE,
+from vehicle_models.models import VehicleBrand, VehicleModel, VehicleSubModel
+from .vehicledata import (VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_USED_LIST, FUEL_TYPE, TRANSMISSION_TYPE,
                           DRIVE_TYPE, STEERINGWHEEL_POSITION, COUNTRY_OF_ORIGIN_LIST,
                           O_CONDITION_LIST,
                           T_CONDITION_LIST,
@@ -50,7 +51,7 @@ def current_month():
 class Vehicle(models.Model):
     pictures = models.CharField(max_length=1000, null=True, blank=True)
     vehicle_type = models.CharField(
-        max_length=60, blank=True, choices=VEHICLE_TYPE_LIST)
+        max_length=60, blank=True, choices=VEHICLE_TYPE_LIST, default="car")
     price = models.PositiveIntegerField(
         validators=[MaxValueValidator(100000000)], blank=True)
     reduced_price = models.PositiveIntegerField(
@@ -66,8 +67,9 @@ class Vehicle(models.Model):
     damaged = models.BooleanField(blank=True, default=False)
     vehicle_model_year = models.IntegerField(
         choices=year_choices(), default=current_year())
-    brand = models.CharField(max_length=60, blank=True, choices=BRAND_LIST)
-    vehicle_model = models.CharField(max_length=60, blank=True)
+    brand = models.ForeignKey(VehicleBrand, on_delete=models.CASCADE)
+    vehicle_model = models.ForeignKey(VehicleModel, on_delete=models.CASCADE, blank=True)
+    vehicle_submodel = models.ForeignKey(VehicleSubModel, on_delete=models.CASCADE, blank=True, null=True)
     vehicle_model_other = models.CharField(
         max_length=60, blank=True, null=True)
     body_type = models.CharField(
@@ -117,6 +119,7 @@ class Vehicle(models.Model):
     last_service_date = models.DateField(
         auto_now_add=False, blank=True, null=True)
     last_service_desc = models.TextField(blank=True, null=True)
+    non_smoker = models.BooleanField(default=True)
     vehicle_desc = models.TextField(blank=True, null=True)
     ad_type = models.CharField(max_length=30, blank=True, choices=AD_TYPE_LIST)
     creation_datetime = models.DateTimeField(auto_now=True, blank=True)
@@ -133,7 +136,7 @@ class Vehicle(models.Model):
         if self.vehicle_model_other:
             return f"({self.id}) {self.vehicle_model_year} {self.brand} {self.vehicle_model} {self.vehicle_model_other} by {self.user} {self.creation_datetime}"
         else:
-            return f"({self.id}) {self.vehicle_model_year} {self.brand} {self.vehicle_model} by {self.user} {self.creation_datetime}"
+            return f"({self.id}) {self.vehicle_model_year} {self.brand} {self.vehicle_model} {self.vehicle_submodel} by {self.user} {self.creation_datetime}"
 
     class Meta:
         ordering = ('creation_datetime', 'price',)

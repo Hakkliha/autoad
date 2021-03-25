@@ -1,444 +1,617 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Add vehicle</title>
-{% load static %}
+    <title>Add vehicle</title>
+    {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'autoad/create_style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'autoad/create_style.css' %}">
 {% endblock %}
 
 {% block content %}
-<form action="." method="POST" style="margin: 50px 0 0 0" class="create_form" enctype="multipart/form-data">
-	{% if request.user.is_authenticated %}{% csrf_token %}{% endif %}
-	{% if my_errors %}
-	<ul id="errors_list">
-		<b>Errors</b>
-		{% for e in my_errors %}
-		<li>{{ e }}</li>
-		{% endfor %}
-	</ul>
-	{% endif %}
-	<div>
-		<div class="inputfield">
-			<p>Ad type</p>
-			<div>{{ form.ad_type }}</div>
-		</div>
-		<hr>
-	</div>
-	<div class="d-none">
-		<div class="inputfield">
-			<p>Vehicle type</p>
-			<div>{{ form.vehicle_type }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Vehicle manufacturer</p>
-			<div>{{ form.brand }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Vehicle model</p>
-			<div class="d-none">{{ form.vehicle_model }}</div>
-            <label for="vehicle_model">choose</label><select id="vehicle_model">
-				<option>Choose a model</option>
-			</select>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Additional model info (Luxury, S-Line, R-Line etc.)</p>
-			<div>{{ form.vehicle_model_other }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Vehicle model year</p>
-			<div>{{ form.vehicle_model_year }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<div>This vehicle is {{ form.new_used }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Body type</p>
-			<div>{{ form.body_type }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Pictures</p>
-			<div>{{ form.pictures }}</div>
-			<h6 style="color: grey; margin-top: 10px;">Max 15 images (jpg, png, gif) at 5 mb each.</h6>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Vehicle power</p>
-			<div>{{ form.power_kw }} kW</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Fuel type</p>
-			<div>{{ form.fuel }}</div>
-		</div>
-		<hr>
-	</div>
-	<div class="fuelaffected">
-		<div class="inputfield">
-			<p>Displacement</p>
-			<div>{{ form.displacement_cm }} cm^3</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p class="fuelaffected">Number of cylinders</p>
-			<p class="electicaffected d-none">Number of motors</p>
-			<div class="fuelcells_style">{{ form.cylinders }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p class="fuelaffected">Fuel tank size</p>
-			<p class="electicaffected d-none">Battery capacity</p>
-			<div class="fuelcells_style">{{ form.fuel_tank_l }} <p class="fuelaffected">l</p>
-				<p class="electicaffected d-none">kWh</p>
-			</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p class="fuelaffected">Fuel consumption (urban)</p>
-			<p class="electicaffected d-none">Electricity consumption (urban)</p>
-			<div class="fuelcells_style">{{ form.fuel_usage_city }} <p class="fuelaffected">l/100km</p>
-				<p class="electicaffected d-none">kWh/100km</p>
-			</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p class="fuelaffected">Fuel consumption (extra-urban)</p>
-			<p class="electicaffected d-none">Electricity consumption (extra-urban)</p>
-			<div class="fuelcells_style">{{ form.fuel_usage_out }} <p class="fuelaffected">l/100km</p>
-				<p class="electicaffected d-none">kWh/100km</p>
-			</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p class="fuelaffected">Fuel consumption (average)</p>
-			<p class="electicaffected d-none">Electricity consumption (average)</p>
-			<div class="fuelcells_style">{{ form.fuel_usage_average }} <p class="fuelaffected">l/100km</p>
-				<p class="electicaffected d-none">kWh/100km</p>
-			</div>
-		</div>
-		<hr>
-	</div>
-	<div class="fuelaffected">
-		<div class="inputfield">
-			<p>Transmission</p>
-			<div>{{ form.transmission }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Mileage</p>
-			<div>{{ form.mileage_km }} km</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Drive</p>
-			<div>{{ form.drive }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Number of doors</p>
-			<div>{{ form.doors }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Number of seats</p>
-			<div>{{ form.seats }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Steeringwheel</p>
-			<div>{{ form.steeringwheel }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Location of vehicle</p>
-			<div>{{ form.location }}</div>
-		</div>
-		<hr>
+    <form action="." method="POST" style="margin: 50px 0 0 0" class="create_form" enctype="multipart/form-data">
+        {% if request.user.is_authenticated %}{% csrf_token %}{% endif %}
+        {% if my_errors %}
+            <ul id="errors_list">
+                <b>Errors</b>
+                {% for e in my_errors %}
+                    <li>{{ e }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div>
+            <div class="inputfield">
+                <p>I wish to</p>
+                <div id="buy_sell_toggle" class="sell-button">
+                    SELL
+                </div>
+                <div class="d-none">{{ form.ad_type }}</div>
+            </div>
+            <hr>
+        </div>
+        <div class="d-none">
+            <div class="inputfield">
+                <p>Vehicle type</p>
+                <div>{{ form.vehicle_type }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Vehicle manufacturer</p>
+                <div>{{ form.brand }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <label for="model_fi">Vehicle Model:</label>
+                <select name="model_fi" id="model_fi">
+                    <option value="">----------</option>
+                </select>
+                <p class="d-none">{{ form.model }}</p>
+            </div>
+            <hr>
+        </div>
+        <div id="submodel_field" class="d-none">
+            <div class="inputfield">
+                <label for="submodel_fi">Submodel:</label>
+                <select name="submodel_fi" id="submodel_fi">
+                    <option value="">----------</option>
+                </select>
+                <p class="d-none">{{ form.submodel }}</p>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Additional model info (Luxury, S-Line, R-Line etc.)</p>
+                <div>{{ form.vehicle_model_other }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Vehicle model year</p>
+                <div>{{ form.vehicle_model_year }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <div>This vehicle is {{ form.new_used }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Body type</p>
+                <div>{{ form.body_type }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Pictures</p>
+                <div>{{ form.pictures }}</div>
+                <h6 style="color: grey; margin-top: 10px;">Max 15 images (jpg, png, gif) at 5 mb each.</h6>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Vehicle power</p>
+                <div>{{ form.power_kw }} kW</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Fuel type</p>
+                <div>{{ form.fuel }}</div>
+            </div>
+            <hr>
+        </div>
+        <div class="fuelaffected">
+            <div class="inputfield">
+                <p>Displacement</p>
+                <div>{{ form.displacement_cm }} cm^3</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p class="fuelaffected">Number of cylinders</p>
+                <p class="electicaffected d-none">Number of motors</p>
+                <div class="fuelcells_style">{{ form.cylinders }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p class="fuelaffected">Fuel tank size</p>
+                <p class="electicaffected d-none">Battery capacity</p>
+                <div class="fuelcells_style">{{ form.fuel_tank_l }} <p class="fuelaffected">l</p>
+                    <p class="electicaffected d-none">kWh</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p class="fuelaffected">Fuel consumption (urban)</p>
+                <p class="electicaffected d-none">Electricity consumption (urban)</p>
+                <div class="fuelcells_style">{{ form.fuel_usage_city }} <p class="fuelaffected">l/100km</p>
+                    <p class="electicaffected d-none">kWh/100km</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p class="fuelaffected">Fuel consumption (extra-urban)</p>
+                <p class="electicaffected d-none">Electricity consumption (extra-urban)</p>
+                <div class="fuelcells_style">{{ form.fuel_usage_out }} <p class="fuelaffected">l/100km</p>
+                    <p class="electicaffected d-none">kWh/100km</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p class="fuelaffected">Fuel consumption (average)</p>
+                <p class="electicaffected d-none">Electricity consumption (average)</p>
+                <div class="fuelcells_style">{{ form.fuel_usage_average }} <p class="fuelaffected">l/100km</p>
+                    <p class="electicaffected d-none">kWh/100km</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="fuelaffected">
+            <div class="inputfield">
+                <p>Transmission</p>
+                <div>{{ form.transmission }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Mileage</p>
+                <div>{{ form.mileage_km }} km</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Drive</p>
+                <div>{{ form.drive }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Number of doors</p>
+                <div>{{ form.doors }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Number of seats</p>
+                <div>{{ form.seats }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Steeringwheel</p>
+                <div>{{ form.steeringwheel }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Location of vehicle</p>
+                <div>{{ form.location }}</div>
+            </div>
+            <hr>
 
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Vehicle VIN</p>
-			<div>{{ form.vin_code }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Numberplate</p>
-			<div>{{ form.numberplate }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Price</p>
-			<div>{{ form.price }} €</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Reduced Price</p>
-			<div>{{ form.reduced_price }} €</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>VAT will be added {{ form.value_added_tax }}</p>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Equipment</p>
-			<div class="d-none">{{ form.equipment }}</div>
-			<div id="equipment_choice_field"></div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<div>This vehicle has been imported {{ form.is_import }}</div>
-		</div>
-		<hr>
-	</div>
-	<div class="importaffected d-none">
-		<div class="inputfield">
-			<p>Date of the import</p>
-			<div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-				{{ form.date_of_import }}
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Vehicle VIN</p>
+                <div>{{ form.vin_code }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Numberplate</p>
+                <div>{{ form.numberplate }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Price</p>
+                <div>{{ form.price }} €</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Reduced Price</p>
+                <div>{{ form.reduced_price }} €</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>VAT will be added {{ form.value_added_tax }}</p>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Equipment</p>
+                <div class="d-none">{{ form.equipment }}</div>
+                <div id="equipment_choice_field"></div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <div>This vehicle has been imported {{ form.is_import }}</div>
+            </div>
+            <hr>
+        </div>
+        <div class="importaffected d-none">
+            <div class="inputfield">
+                <p>Date of the import</p>
+                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                    {{ form.date_of_import }}
 
-				<div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
-					<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-				</div>
-			</div>
-		</div>
-		<hr>
-	</div>
-	<div class="importaffected d-none">
-		<div class="inputfield">
-			<p>Country of origin</p>
-			<div>{{ form.country_of_origin }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<div>I am owner nr {{ form.nr_owner }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<div>This vehicle has been customized {{ form.customisation }}</div>
-		</div>
-		<hr>
-	</div>
-	<div class="customisationaffected d-none">
-		<div class="inputfield">
-			<p>Description of the customization</p>
-			<div>{{ form.customisation_desc }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Optical condition</p>
-			<div>{{ form.optical_condition }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Technical condition</p>
-			<div>{{ form.technical_condition }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Interior condition</p>
-			<div>{{ form.interior_condition }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Last service date</p>
-			<div class="input-group date" id="datetimepicker5" data-target-input="nearest">
-				{{ form.last_service_date }}
+                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="importaffected d-none">
+            <div class="inputfield">
+                <p>Country of origin</p>
+                <div>{{ form.country_of_origin }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <div>I am owner nr {{ form.nr_owner }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <div>This vehicle has been customized {{ form.customisation }}</div>
+            </div>
+            <hr>
+        </div>
+        <div class="customisationaffected d-none">
+            <div class="inputfield">
+                <p>Description of the customization</p>
+                <div>{{ form.customisation_desc }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Optical condition</p>
+                <div>{{ form.optical_condition }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Technical condition</p>
+                <div>{{ form.technical_condition }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Interior condition</p>
+                <div>{{ form.interior_condition }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Last service date</p>
+                <div class="input-group date" id="datetimepicker5" data-target-input="nearest">
+                    {{ form.last_service_date }}
 
-				<div class="input-group-append" data-target="#datetimepicker5" data-toggle="datetimepicker">
-					<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-				</div>
-			</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Last service description</p>
-			<div>{{ form.last_service_desc }}</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Warranty until</p>
-			<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-				{{ form.warranty_until }}
+                    <div class="input-group-append" data-target="#datetimepicker5" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Last service description</p>
+                <div>{{ form.last_service_desc }}</div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Warranty until</p>
+                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                    {{ form.warranty_until }}
 
-				<div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-					<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-				</div>
-			</div>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Insurance until</p>
-			<div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-				{{ form.insurance_until }}
+                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Insurance until</p>
+                <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                    {{ form.insurance_until }}
 
-				<div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-					<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-				</div>
-			</div>
-			<hr>
-		</div>
-		<div>
-			<div class="inputfield">
-				<p>Valid MOT until</p>
-				<div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-					{{ form.valid_mot_until }}
+                    <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div>
+                <div class="inputfield">
+                    <p>Valid MOT until</p>
+                    <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+                        {{ form.valid_mot_until }}
 
-					<div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
-						<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-					</div>
-				</div>
-			</div>
-			<hr>
-		</div>
-		<div>
-			<div class="inputfield">
-				<p>Service history book {{ form.service_history_bk }}</p>
-			</div>
-			<hr>
+                        <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div>
+                <div class="inputfield">
+                    <p>Service history book {{ form.service_history_bk }}</p>
+                </div>
+                <hr>
 
-		</div>
-		<div>
-			<div class="inputfield">
-				<p>The Vehicle has been in an accident {{ form.accident }}</p>
-			</div>
-			<hr>
-		</div>
-		<div class="inputfield">
-			<p>The Vehicle is currently damaged {{ form.damaged }}</p>
-		</div>
-		<hr>
-	</div>
-	<div>
-		<div class="inputfield">
-			<p>Vehicle description</p>
-			<div>{{ form.vehicle_desc }}</div>
-		</div>
-		<hr>
-	</div>
-	<div class="inputfield">
-		<input type="submit" name="Save" id="final_submit" />
-	</div>
-</form>
-<script>
-	$(function () {
-		$("#datetimepicker1").datetimepicker({
-			format: 'DD-MM-YYYY',
-		});
-	});
+            </div>
+            <div>
+                <div class="inputfield">
+                    <p>The Vehicle has been in an accident {{ form.accident }}</p>
+                </div>
+                <hr>
+            </div>
+            <div class="inputfield">
+                <p>The Vehicle is currently damaged {{ form.damaged }}</p>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
 
-	$(function () {
-		$("#datetimepicker2").datetimepicker({
-			format: 'DD-MM-YYYY',
-		});
-	});
+                <label for="non_smoker" style="padding-right: 0.5rem;">Non-smoker vehicle</label>{{ form.non_smoker }}
+            </div>
+            <hr>
+        </div>
+        <div>
+            <div class="inputfield">
+                <p>Vehicle description</p>
+                <div>{{ form.vehicle_desc }}</div>
+            </div>
+            <hr>
+        </div>
+        <div class="inputfield">
+            <input type="submit" name="Save" id="final_submit"/>
+        </div>
+    </form>
 
-	$(function () {
-		$("#datetimepicker3").datetimepicker({
-			format: 'DD-MM-YYYY',
-		});
-	});
 
-	$(function () {
-		$("#datetimepicker4").datetimepicker({
-			format: 'DD-MM-YYYY',
-		});
-	});
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.js"></script>
+    <script>
 
-	$(function () {
-		$("#datetimepicker5").datetimepicker({
-			format: 'DD-MM-YYYY',
-		});
-	});
-</script>
-<script src="{% static 'autoad/create_function.js' %}" type="module"></script>
+        let loc = window.location;
+        let brand_sel = $("#id_brand");
+        let model_sel = $("#model_fi");
+        let submodel_sel = $("#submodel_fi");
+        let buy_sell_toggle = $("#buy_sell_toggle");
+        let counter = true;
 
-<script type="text/javascript">
-	var activatePlacesSearch = () => {
-		var input = $("#id_location")[0];
-		var autocomplete = new google.maps.places.Autocomplete(input);
-	};
+        let wsStart = 'ws://';
+        if (loc.protocol === 'https:') {
+            wsStart = 'wss://';
+        }
+        let endpoint = wsStart + loc.host + loc.pathname;
+        let socket = new ReconnectingWebSocket(endpoint);
+        socket.onmessage = function (e) {
+            console.log("message", e);
+            let chatDataMsg = JSON.parse(e.data);
+            let keys_in_message = Object.keys(chatDataMsg);
+            console.log(keys_in_message)
+            if (keys_in_message.includes("mudelid")) {
+                console.log(chatDataMsg.mudelid)
+                let new_models = "";
+                for (let i = 0; i < chatDataMsg.mudelid.length; i++) {
+                    let muutuja = chatDataMsg.mudelid[i]
+                    let inside_html = '<option value="' + muutuja[0] + '">' + muutuja[1] + '</option>'
+                    new_models += inside_html
+                }
 
-</script>
+                model_sel.html($.parseHTML(new_models));
+                let mdl_value = chatDataMsg.mudelid[0][0];
+                $("#id_model").val(mdl_value);
+                let finalData = {
+                    'model': mdl_value
+                };
+                console.log(finalData);
+                socket.send(JSON.stringify(finalData));
+            }
+            if (keys_in_message.includes('submudelid')) {
+                let new_submodels = "";
+                for (let i = 0; i < chatDataMsg.submudelid.length; i++) {
+                    let muutuja = chatDataMsg.submudelid[i];
+                    let inside_html = '<option value="' + muutuja[0] + '">' + muutuja[1] + '</option>'
+                    new_submodels += inside_html
+                }
+                if (chatDataMsg.submudelid.length >= 1) {
+                    $("#submodel_field").removeClass("d-none")
+                    submodel_sel.html($.parseHTML(new_submodels))
+                    $("#id_submodel").val(submodel_sel.val())
+                } else {
+                    $("#submodel_field").addClass("d-none")
+                }
+            }
+            if (counter) {
+                let finalData = {
+                    'text': chatDataMsg
+                };
+                console.log(finalData);
+                socket.send(JSON.stringify(finalData));
+                counter = false;
+            }
+        };
+        socket.onopen = function (e) {
+            console.log("open", e);
+            brand_sel.change(() => {
+                let brand_value = brand_sel.val();
+                if (brand_value !== "") {
+                    let finalData = {
+                        'brand': brand_value
+                    };
+                    console.log(finalData);
+                    socket.send(JSON.stringify(finalData));
+                } else {
+                    model_sel.html($.parseHTML('<option value="">----------</option>'))
+                    submodel_sel.html($.parseHTML('<option value="">----------</option>'))
+                }
+            });
+            model_sel.change(() => {
+                let model_value = model_sel.val();
+                $("#id_model").val(model_value)
+                let finalData = {
+                    'model': model_value
+                };
+                console.log(finalData);
+                socket.send(JSON.stringify(finalData));
 
-<script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL1mFnGAH6ivDX7lBedcXbh-pzS1lpuwM&libraries=places&callback=activatePlacesSearch"></script>
+
+            });
+        };
+        socket.onerror = function (e) {
+            console.log("error", e);
+        };
+        socket.onclose = function (e) {
+            console.log("close", e);
+            counter = true
+        };
+        buy_sell_toggle.click(() => {
+            let element = buy_sell_toggle;
+            if (element.hasClass("sell-button")) {
+                element.removeClass("sell-button")
+                element.addClass("buy-button")
+                element.html("BUY")
+            } else {
+                element.removeClass("buy-button")
+                element.addClass("sell-button")
+                element.html("SELL")
+            }
+        });
+        submodel_sel.click(() => {
+            $("#id_submodel").val(submodel_sel.val())
+        });
+        submodel_sel.change(() => {
+            $("#id_submodel").val(submodel_sel.val())
+        });
+        buy_sell_toggle.click(function () {
+            if (buy_sell_toggle.hasClass("sell-button")) {
+                $("#id_ad_type").val("Sale")
+            } else {
+                $("#id_ad_type").val("Buy")
+            }
+        });
+        $(document).ready(() => {
+            if (buy_sell_toggle.hasClass("sell-button")) {
+                $("#id_buy_sell").val("SELL")
+            } else {
+                $("#id_buy_sell").val("BUY")
+            }
+        });
+    </script>
+
+
+    <script>
+        $(function () {
+            $("#datetimepicker1").datetimepicker({
+                format: 'DD-MM-YYYY',
+            });
+        });
+
+        $(function () {
+            $("#datetimepicker2").datetimepicker({
+                format: 'DD-MM-YYYY',
+            });
+        });
+
+        $(function () {
+            $("#datetimepicker3").datetimepicker({
+                format: 'DD-MM-YYYY',
+            });
+        });
+
+        $(function () {
+            $("#datetimepicker4").datetimepicker({
+                format: 'DD-MM-YYYY',
+            });
+        });
+
+        $(function () {
+            $("#datetimepicker5").datetimepicker({
+                format: 'DD-MM-YYYY',
+            });
+        });
+    </script>
+    <script src="{% static 'autoad/create_function.js' %}" type="module"></script>
+
+    <script type="text/javascript">
+        var activatePlacesSearch = () => {
+            var input = $("#id_location")[0];
+            var autocomplete = new google.maps.places.Autocomplete(input);
+        };
+
+    </script>
+    <style>
+
+        #buy_sell_toggle {
+            padding: 1.5rem;
+            border-radius: 0.25rem;
+            text-align: center;
+            margin-right: 2rem;
+        }
+
+        .sell-button {
+            background-color: #F00851;
+            color: white;
+        }
+
+        .buy-button {
+            background-color: #00ffcd;
+        }
+
+    </style>
+
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL1mFnGAH6ivDX7lBedcXbh-pzS1lpuwM&libraries=places&callback=activatePlacesSearch"></script>
 {% endblock %}

@@ -1,190 +1,190 @@
 table, th {
-	border: 1px solid black;
+    border: 1px solid black;
 }
 
 td, th {
-	padding: 5px 8px;
+    padding: 5px 8px;
 }
 
 th {
-	text-align: center !important;
+    text-align: center !important;
 }
 
 table {
-	margin: 10px 10px 25px;
-	flex-grow: 1;
-	min-width: 45%;
+    margin: 10px 10px 25px;
+    flex-grow: 1;
+    min-width: 45%;
 }
 
 hr {
-	clear: both;
-	display: block;
-	background-color: darkgrey;
-	height: 1px;
+    clear: both;
+    display: block;
+    background-color: darkgrey;
+    height: 1px;
 }
 
 tr td:nth-child(2) {
-	text-align: center;
+    text-align: center;
 }
 
 #main_container {
-	width: 100%;
-	margin: 0;
-	display: flex;
-	flex-flow: column nowrap;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 #name_div {
-	height: 150px;
+    height: 150px;
 }
 
 #vehicle_display {
-	display: flex;
-	flex-flow: column wrap;
-	align-content: center;
-	padding: 20px 2% 0 2%;
-	width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    padding: 20px 2% 0 2%;
+    width: 100%;
 }
 
 .active_banner {
-	width: 100%;
-	text-align: center;
-	color: darkred;
-	padding: 10px;
-	border: 2px darkred solid;
-	margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: darkred;
+    padding: 10px;
+    border: 2px darkred solid;
+    margin-bottom: 10px;
 }
 
 #vehicle_images {
-	width: 100%;
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 
 #other_pictures {
-	width: 50%;
-	align-self: center;
+    width: 50%;
+    align-self: center;
 }
 
 .other_picture_element {
-	object-fit: contain;
-	width: 100%;
-	max-height: 300px;
+    object-fit: contain;
+    width: 100%;
+    max-height: 300px;
 }
 
 #info_tables {
-	display: flex;
-	flex-flow: row wrap;
-	width: 100%;
-	justify-content: center;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: center;
 }
 
 #bodyandprice {
-	display: flex;
-	flex-flow: row;
-	justify-content: space-between;
-	margin: 10px;
-	align-items: center;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin: 10px;
+    align-items: center;
 }
 
 .outer_div_price {
-	width: 33%;
+    width: 33%;
 }
 
 .sale_tag_outer {
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 #sale_tag {
-	display: inline-block;
-	text-align: center;
+    display: inline-block;
+    text-align: center;
 }
 
 #bodyandprice p {
-	padding: 5px 10px;
-	border-radius: 5px;
-	color: white;
-	margin: 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    margin: 0;
 }
 
 #bodyandprice h5 {
-	margin: 0;
+    margin: 0;
 }
 
 #align_price_content_left {
-	display: flex;
-	justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 
 #price {
-	display: inline-block;
-	text-align: center;
+    display: inline-block;
+    text-align: center;
 }
 
 #price h6 {
-	font-size: 12px;
-	color: darkgrey;
+    font-size: 12px;
+    color: darkgrey;
 }
 
 #price h4 {
-	margin: 0;
+    margin: 0;
 }
 
 #price_price {
-	display: inline-block;
+    display: inline-block;
 }
 
 #price_price s {
-	padding: 10px;
+    padding: 10px;
 }
 
 #vehicle_name {
-	display: flex;
-	margin: auto 10px auto 10px;
-	align-items: flex-end;
-	justify-content: space-between;
+    display: flex;
+    margin: auto 10px auto 10px;
+    align-items: flex-end;
+    justify-content: space-between;
 }
 
 #customised_table, #equipment_table {
-	width: 100%;
+    width: 100%;
 }
 
 .damage_notice {
-	color: red;
-	font-weight: bold;
-	border: 2px dashed red;
-	border-radius: 7px;
-	padding: 7px;
-	width: auto;
-	margin: 20px 10px;
-	text-align: center;
+    color: red;
+    font-weight: bold;
+    border: 2px dashed red;
+    border-radius: 7px;
+    padding: 7px;
+    width: auto;
+    margin: 20px 10px;
+    text-align: center;
 }
 
 #price_price {
-	font-size: 20px;
+    font-size: 20px;
 }
 
 #price_price b {
-	font-size: 40px;
+    font-size: 40px;
 }
 
 #reduced_price {
-	color: #ff3300;
+    color: #ff3300;
 }
 
 #action_buttons {
-	display: flex;
-	flex-flow: row nowrap;
+    display: flex;
+    flex-flow: row nowrap;
 }
 
 .slick-prev:before, .slick-next:before {
-	color: red !important;
+    color: red !important;
 }
 
 .slick-prev, .slick-next {
-	height: 100% !important;
+    height: 100% !important;
 }

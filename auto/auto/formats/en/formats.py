@@ -13,14 +13,14 @@ FIRST_DAY_OF_WEEK = 1
 # LIST: http://docs.python.org/library/datetime.html#strftime-strptime-behavior
 
 DATE_INPUT_FORMATS = (
-    '%d-%m-%Y',     # '21-03-2014'
+    '%d-%m-%Y',  # '21-03-2014'
 )
 TIME_INPUT_FORMATS = (
-    '%H:%M:%S',     # '17:59:59'
-    '%H:%M',        # '17:59'
+    '%H:%M:%S',  # '17:59:59'
+    '%H:%M',  # '17:59'
 )
 DATETIME_INPUT_FORMATS = (
-    '%d-%m-%Y %H:%M',     # '21-03-2014 17:59'
+    '%d-%m-%Y %H:%M',  # '21-03-2014 17:59'
 )
 
 DECIMAL_SEPARATOR = u'.'

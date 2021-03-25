@@ -16,8 +16,8 @@ from django.views.generic import (
     DeleteView
 )
 from django.views.generic.base import View, HttpResponseRedirect
-from vehicle_models.models import VehicleBrand, VehicleModel, VehicleSubModel
 
+from vehicle_models.models import VehicleBrand, VehicleModel, VehicleSubModel
 from .filters import VehicleFilter
 from .forms import VehicleForm, ActiveVehicleForm
 from .models import Vehicle
@@ -168,7 +168,8 @@ class VehicleCreateView(View):
             damaged = form.cleaned_data['damaged']
             vehicle_model_year = form.cleaned_data['vehicle_model_year']
             brand = form.cleaned_data['brand']
-            vehicle_model = form.cleaned_data['vehicle_model']
+            vehicle_model = form.cleaned_data['model']
+            vehicle_submodel = form.cleaned_data['submodel']
             vehicle_model_other = form.cleaned_data['vehicle_model_other']
             body_type = form.cleaned_data['body_type']
             power_kw = form.cleaned_data['power_kw']
@@ -202,13 +203,15 @@ class VehicleCreateView(View):
             last_service_desc = form.cleaned_data['last_service_desc']
             vehicle_desc = form.cleaned_data['vehicle_desc']
             ad_type = form.cleaned_data['ad_type']
+            non_smoker = form.cleaned_data['non_smoker']
             new_vehicle = Vehicle(user=request.user, pictures=images_array, vehicle_type=vehicle_type,
                                   new_used=new_used, price=price, value_added_tax=value_added_tax,
                                   warranty_until=warranty_until,
                                   insurance_until=insurance_until, valid_mot_until=valid_mot_until,
                                   service_history_bk=service_history_bk, accident=accident,
                                   damaged=damaged, vehicle_model_year=vehicle_model_year, brand=brand,
-                                  vehicle_model=vehicle_model, vehicle_model_other=vehicle_model_other,
+                                  vehicle_model=vehicle_model, vehicle_submodel=vehicle_submodel,
+                                  vehicle_model_other=vehicle_model_other,
                                   body_type=body_type, power_kw=power_kw, displacement_cm=displacement_cm,
                                   cylinders=cylinders, fuel=fuel, fuel_tank_l=fuel_tank_l,
                                   fuel_usage_city=fuel_usage_city, fuel_usage_out=fuel_usage_out,
@@ -221,7 +224,7 @@ class VehicleCreateView(View):
                                   optical_condition=optical_condition, technical_condition=technical_condition,
                                   interior_condition=interior_condition, last_service_date=last_service_date,
                                   last_service_desc=last_service_desc, vehicle_desc=vehicle_desc,
-                                  ad_type=ad_type, reduced_price=reduced_price
+                                  ad_type=ad_type, reduced_price=reduced_price, non_smoker=non_smoker
                                   )
             if self.my_errors:
                 return render(request, self.template_name, {'form': form, 'my_errors': self.my_errors})
@@ -338,7 +341,8 @@ class VehicleUpdateView(View):
                     damaged = form.cleaned_data['damaged']
                     vehicle_model_year = form.cleaned_data['vehicle_model_year']
                     brand = form.cleaned_data['brand']
-                    vehicle_model = form.cleaned_data['vehicle_model']
+                    vehicle_model = form.cleaned_data['model']
+                    vehicle_submodel = form.cleaned_data['submodel']
                     vehicle_model_other = form.cleaned_data['vehicle_model_other']
                     body_type = form.cleaned_data['body_type']
                     power_kw = form.cleaned_data['power_kw']
@@ -372,13 +376,15 @@ class VehicleUpdateView(View):
                     last_service_desc = form.cleaned_data['last_service_desc']
                     vehicle_desc = form.cleaned_data['vehicle_desc']
                     ad_type = form.cleaned_data['ad_type']
+                    non_smoker = form.cleaned_data['non_smoker']
                     new_vehicle = Vehicle(user=request.user, pictures=images_array, vehicle_type=vehicle_type,
                                           new_used=new_used, price=price, value_added_tax=value_added_tax,
                                           warranty_until=warranty_until,
                                           insurance_until=insurance_until, valid_mot_until=valid_mot_until,
                                           service_history_bk=service_history_bk, accident=accident,
                                           damaged=damaged, vehicle_model_year=vehicle_model_year, brand=brand,
-                                          vehicle_model=vehicle_model, vehicle_model_other=vehicle_model_other,
+                                          vehicle_model=vehicle_model, vehicle_submodel=vehicle_submodel,
+                                          vehicle_model_other=vehicle_model_other,
                                           body_type=body_type, power_kw=power_kw, displacement_cm=displacement_cm,
                                           cylinders=cylinders, fuel=fuel, fuel_tank_l=fuel_tank_l,
                                           fuel_usage_city=fuel_usage_city, fuel_usage_out=fuel_usage_out,
@@ -393,7 +399,7 @@ class VehicleUpdateView(View):
                                           interior_condition=interior_condition, last_service_date=last_service_date,
                                           last_service_desc=last_service_desc, vehicle_desc=vehicle_desc,
                                           ad_type=ad_type, id=obj.id, creation_datetime=obj.creation_datetime,
-                                          reduced_price=reduced_price)
+                                          reduced_price=reduced_price, non_smoker=non_smoker)
                     if self.my_errors:
                         return render(request, self.template_name,
                                       {'form': form, 'my_errors': self.my_errors, 'object': obj})

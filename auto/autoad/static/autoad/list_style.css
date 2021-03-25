@@ -1,79 +1,80 @@
 body {
-	max-width: 100%;
+    max-width: 100%;
 }
 
 #main_content {
-	min-height: 1000px;
-	max-width: 100%;
-	display: flex;
-	flex-flow: column nowrap;
+    min-height: 1000px;
+    max-width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 .pagination {
-	align-self: center;
+    align-self: center;
 }
 
 .list-item {
-	width: 100%;
-	display: flex;
-	flex-flow: row nowrap;
-	padding-left: 20px;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    padding-left: 20px;
 }
 
 .list-item img {
-	height: 150px;
-	width: 250px;
-	object-fit: cover;
+    height: 150px;
+    width: 250px;
+    object-fit: cover;
 }
 
 .details_area {
-	margin-left: 25px;
-	color: black;
+    margin-left: 25px;
+    color: black;
 }
 
 #searchbar {
-	padding: 20px;
+    padding: 20px;
 }
 
 .search-box {
-	background: linear-gradient(rgba(133, 188, 213, 0.45), rgba(183, 215, 230, 0.45));
-	padding: 20px;
-	border-radius: 10px;
-	display: block;
-	float: left;
+    background: linear-gradient(rgba(133, 188, 213, 0.45), rgba(183, 215, 230, 0.45));
+    padding: 20px;
+    border-radius: 10px;
+    display: block;
+    float: left;
 }
 
 table tr td {
-	padding: 10px;
-	text-align: center;
+    padding: 10px;
+    text-align: center;
 }
 
 table tr {
-	border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
 }
 
 .price_price s {
-	font-size: 15px;
+    font-size: 15px;
 }
 
 .vehicle-details {
-	height: 150px;
-	width: 100%;
-	display: flex;
-	flex-flow: column wrap;
+    height: 150px;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
 }
 
 .vehicle-details h5 {
-	padding: 5px;
+    padding: 5px;
 }
 
 @media only screen and (max-aspect-ratio: 10/10) {
-	.list-item h3, .list-item h4, .list-item h5{
-		font-size: 15px;
-		padding: 1px;
-	}
- 	.list-item img {
-		width: 40%;
-		height: 100px;
-	}
+    .list-item h3, .list-item h4, .list-item h5 {
+        font-size: 15px;
+        padding: 1px;
+    }
+
+    .list-item img {
+        width: 40%;
+        height: 100px;
+    }
 }

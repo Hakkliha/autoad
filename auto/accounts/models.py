@@ -1,14 +1,16 @@
-from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin
 )
+from django.db import models
+
 # Create your models here.
 
 GENDERS = (('male', 'Male'), ('female', 'Female'))
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, first_name=None, last_name=None, gender=None, birthday=None, password=None, is_active=True, is_staff=False, is_admin=False):
+    def create_user(self, email, first_name=None, last_name=None, gender=None, birthday=None, password=None,
+                    is_active=True, is_staff=False, is_admin=False):
         if not email:
             raise ValueError('Users must have an email address.')
         if not password:

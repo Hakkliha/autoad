@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 {% block title %}
-{% load static %}
-	<title>Login</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'accounts/login_style.css' %}">
+    {% load static %}
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/login_style.css' %}">
 {% endblock %}
 {% block content %}
-<center>
-	<h1>Login</h1>
-    <form method='POST' action="."> {% csrf_token %}
-      {{ form.as_p }}
-      <button type='submit' class='btn btn-primary'>Submit</button>
-    </form>
-    {% if my_errors %}
-		<ul id="errors_list">
-			<b>Errors</b>
-			{% for e in my_errors %}
-			<li>{{ e }}</li>
-			{% endfor %}
-		</ul>
-		{% endif %}
-</center>
+    <center>
+        <h1>Login</h1>
+        <form method='POST' action="."> {% csrf_token %}
+            {{ form.as_p }}
+            <button type='submit' class='btn btn-primary'>Submit</button>
+        </form>
+        {% if my_errors %}
+            <ul id="errors_list">
+                <b>Errors</b>
+                {% for e in my_errors %}
+                    <li>{{ e }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </center>
 {% endblock %}

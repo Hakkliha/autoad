@@ -2,10 +2,10 @@
 VEHICLE_TYPE_LIST = (('Car', 'Car'),)
 
 BODY_TYPE_CHOICES = (
-('Saloon', 'Saloon'), ('Cabriolet / Roadster', 'Cabriolet / Roadster'), ('Estate Car', 'Estate Car'),
-('Small Car', 'Small Car'), ('Sports Car / Coupe',
-                             'Sports Car / Coupe'), ('SUV / Off-road Vehicle', 'SUV / Off-road Vehicle'),
-('Van / Minibus', 'Van / Minibus'), ('Pickup Truck', 'Pickup Truck'), ('Other', 'Other'))
+    ('Saloon', 'Saloon'), ('Cabriolet / Roadster', 'Cabriolet / Roadster'), ('Estate Car', 'Estate Car'),
+    ('Small Car', 'Small Car'), ('Sports Car / Coupe',
+                                 'Sports Car / Coupe'), ('SUV / Off-road Vehicle', 'SUV / Off-road Vehicle'),
+    ('Van / Minibus', 'Van / Minibus'), ('Pickup Truck', 'Pickup Truck'), ('Other', 'Other'))
 
 NEW_USED_LIST = (('Used', 'Used'), ('New', 'New'))
 

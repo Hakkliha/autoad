@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if request.user == object.user %}
-<center>
-	<form method='POST'>{% csrf_token %}
-		<h1>Do you want to delete the vehicle "{{ object.vehicle_model_year }} {{ object.brand }}
-			{{ object.vehicle_model }} {{ object.vehicle_model_other }}"?</h1>
-		<p><input type='submit' value='Yes' /> <a href='../'>Cancel</a>
-		<p>
-	</form>
-</center>
+    {% if request.user == object.user %}
+        <center>
+            <form method='POST'>{% csrf_token %}
+                <h1>Do you want to delete the vehicle "{{ object.vehicle_model_year }} {{ object.brand }}
+                    {{ object.vehicle_model }} {{ object.vehicle_model_other }}"?</h1>
+                <p><input type='submit' value='Yes'/> <a href='../'>Cancel</a>
+                <p>
+            </form>
+        </center>
 
-{% else %}
-<center>
-	<h1>You do not have permission to delete this vehicle.</h1>
-</center>
+    {% else %}
+        <center>
+            <h1>You do not have permission to delete this vehicle.</h1>
+        </center>
 
-{% endif %}
+    {% endif %}
 
 {% endblock %}

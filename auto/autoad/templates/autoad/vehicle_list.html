@@ -2,111 +2,118 @@
 
 
 {% block title %}
-<title>Search</title>
-{% load static %}
+    <title>Search</title>
+    {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'autoad/list_style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'autoad/list_style.css' %}">
 {% endblock %}
 
 
 {% block content %}
-<div id="main_content">
-	<form method="GET" id="searchbar">
-		<div class="search-box">
-			<table>
-				<tr>
-					<td>Vehicle make</td>
-					<td> {{ filter.form.brand }}</td>
-				</tr>
-				<tr class="d-none">
-					<td>{{ filter.form.vehicle_model }}</td>
-				</tr>
-				<tr>
-					<td>Vehicle model</td>
-					<td><select id="vehicle_model">
-							<option>Choose a model</option>
-						</select></td>
-				</tr>
-				<tr>
-					<td>Price range</td>
-					<td>{{ filter.form.price }} €</td>
-				</tr>
-				<tr>
-					<td>Model year range</td>
-					<td>{{ filter.form.vehicle_model_year }}</td>
-				</tr>
-				<tr>
-					<td>Mileage</td>
-					<td>{{ filter.form.mileage_km }} km</td>
-				</tr>
-				<tr>
-					<td>Order by</td>
-					<td>{{ filter.form.ordering }}</td>
-				</tr>
-				<tr style="border: none;">
-					<td colspan="2" style="text-align: center;"><button type="submit"
-							class="btn btn-primary">Search</button> <a href="." style="margin-left: 10px"
-							class="btn">Clear</a></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<p style="margin-left: 30px; color: red;"><b>Model searches for parent model search (ex.
-								2-series, CLA-Class
-								etc.) will currently not display all models with that parent model.</b></p>
-					</td>
-				</tr>
-			</table>
-		</div>
+    <div id="main_content">
+        <form method="GET" id="searchbar">
+            <div class="search-box">
+                <table>
+                    <tr>
+                        <td>Vehicle make</td>
+                        <td> {{ filter.form.brand }}</td>
+                    </tr>
+                    <tr class="d-none">
+                        <td>{{ filter.form.vehicle_model }}</td>
+                    </tr>
+                    <tr>
+                        <td>Vehicle model</td>
+                        <td><select id="vehicle_model">
+                            <option>Choose a model</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td>Price range</td>
+                        <td>{{ filter.form.price }} €</td>
+                    </tr>
+                    <tr>
+                        <td>Model year range</td>
+                        <td>{{ filter.form.vehicle_model_year }}</td>
+                    </tr>
+                    <tr>
+                        <td>Mileage</td>
+                        <td>{{ filter.form.mileage_km }} km</td>
+                    </tr>
+                    <tr>
+                        <td>Order by</td>
+                        <td>{{ filter.form.ordering }}</td>
+                    </tr>
+                    <tr style="border: none;">
+                        <td colspan="2" style="text-align: center;">
+                            <button type="submit"
+                                    class="btn btn-primary">Search
+                            </button>
+                            <a href="." style="margin-left: 10px"
+                               class="btn">Clear</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="margin-left: 30px; color: red;"><b>Model searches for parent model search (ex.
+                                2-series, CLA-Class
+                                etc.) will currently not display all models with that parent model.</b></p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
-	</form>
-	<div id="list_items">
-		{% for instance in response %}
-		{% if instance.active %}
-		<div>
-			<a href='{{ instance.get_absolute_url }}'>
-				<div class="list-item">
-					<img context="{{ instance.pictures }}" id="ad_cover{{ forloop.counter }}" class="list_item_image">
-					<div class="details_area">
-						<h3>{{ instance.brand }} {{ instance.vehicle_model }}
-							{% if instance.vehicle_model_other %}{{ instance.vehicle_model_other }}{% endif %}
-							{{ instance.vehicle_model_year }} </h3>
-						<div class="vehicle-details">
-							<h5>{{ instance.power_kw }} kW</h5>
-							<h5>{{ instance.fuel }}</h5>
-							<h5 class="mileage"><b style="font-weight: inherit;">{{ instance.mileage_km }}</b> km</h5>
-							<h5>{{ instance.transmission }}</h5>
-							<h5>{{ instance.drive }}</h5>
-						</div>
-						<h4 class="price_price">{% if instance.reduced_price %}<b
-								id="reduced_price">{{ instance.reduced_price }} €</b> <s
-								id="original_price">{{ instance.price }} €</s>{% else %}<b>{{ instance.price }}
-								€</b>{% endif %}</h4>
+        </form>
+        <div id="list_items">
+            {% for instance in response %}
+                {% if instance.active %}
+                    <div>
+                        <a href='{{ instance.get_absolute_url }}'>
+                            <div class="list-item">
+                                <img context="{{ instance.pictures }}" id="ad_cover{{ forloop.counter }}"
+                                     class="list_item_image">
+                                <div class="details_area">
+                                    <h3>{{ instance.brand }} {{ instance.vehicle_model }}
+                                        {% if instance.vehicle_model_other %}
+                                            {{ instance.vehicle_model_other }}{% endif %}
+                                        {{ instance.vehicle_model_year }} </h3>
+                                    <div class="vehicle-details">
+                                        <h5>{{ instance.power_kw }} kW</h5>
+                                        <h5>{{ instance.fuel }}</h5>
+                                        <h5 class="mileage"><b
+                                                style="font-weight: inherit;">{{ instance.mileage_km }}</b> km</h5>
+                                        <h5>{{ instance.transmission }}</h5>
+                                        <h5>{{ instance.drive }}</h5>
+                                    </div>
+                                    <h4 class="price_price">{% if instance.reduced_price %}<b
+                                            id="reduced_price">{{ instance.reduced_price }} €</b> <s
+                                            id="original_price">{{ instance.price }} €</s>{% else %}
+                                        <b>{{ instance.price }}
+                                            €</b>{% endif %}</h4>
 
-					</div>
-				</div>
-			</a>
-			<hr>
-		</div>
-		{% endif %}
-		{% endfor %}
-	</div>
-	<div class="pagination">
+                                </div>
+                            </div>
+                        </a>
+                        <hr>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="pagination">
 		<span class="step-links">
 			{% if response.has_previous %}
-			<a href="?page=1">&laquo; first</a>
-			<a href="?page={{ response.previous_page_number }}">previous</a>
-			{% endif %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ response.previous_page_number }}">previous</a>
+            {% endif %}
 
-			<span class="current">
+            <span class="current">
 				Page {{ response.number }} of {{ response.paginator.num_pages }}
 			</span>
 
-			{% if response.has_next %}
-			<a href="?page={{ response.next_page_number }}">next</a>
-			<a href="?page={{ response.paginator.num_pages }}">last &raquo;</a>
-			{% endif %}
+            {% if response.has_next %}
+                <a href="?page={{ response.next_page_number }}">next</a>
+                <a href="?page={{ response.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
 		</span>
-	</div>
-</div>
-<script src="{% static 'autoad/list_function.js' %}" type="module"></script>
+        </div>
+    </div>
+    <script src="{% static 'autoad/list_function.js' %}" type="module"></script>
 {% endblock %}

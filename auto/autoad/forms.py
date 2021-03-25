@@ -1,7 +1,8 @@
 from django import forms
 
+from vehicle_models.models import VehicleBrand, VehicleModel, VehicleSubModel
 from .models import Vehicle, year_choices, current_year
-from .vehicledata import (BRAND_LIST, VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_USED_LIST, FUEL_TYPE, TRANSMISSION_TYPE,
+from .vehicledata import (VEHICLE_TYPE_LIST, BODY_TYPE_CHOICES, NEW_USED_LIST, FUEL_TYPE, TRANSMISSION_TYPE,
                           DRIVE_TYPE, STEERINGWHEEL_POSITION, COUNTRY_OF_ORIGIN_LIST,
                           O_CONDITION_LIST,
                           T_CONDITION_LIST,
@@ -34,8 +35,9 @@ class VehicleForm(forms.ModelForm):
     damaged = forms.BooleanField(required=False, initial=False)
     vehicle_model_year = forms.ChoiceField(
         choices=year_choices(), initial=current_year())
-    brand = forms.ChoiceField(choices=BRAND_LIST)
-    vehicle_model = forms.TextInput()  # FRONT END JS MUUTUS !important lmao
+    brand = forms.ModelChoiceField(queryset=VehicleBrand.objects.all().order_by('brandName'), required=True)
+    model = forms.ModelChoiceField(queryset=VehicleModel.objects.all(), required=True)
+    submodel = forms.ModelChoiceField(queryset=VehicleSubModel.objects.all(), required=False)
     vehicle_model_other = forms.CharField(required=False)
     body_type = forms.ChoiceField(choices=BODY_TYPE_CHOICES)
     power_kw = forms.IntegerField(min_value=0, max_value=20000, required=True)
@@ -80,6 +82,7 @@ class VehicleForm(forms.ModelForm):
         "placeholder": 'DD-MM-YYYY'
     }))
     last_service_desc = forms.TextInput()
+    non_smoker = forms.BooleanField(required=False)
     vehicle_desc = forms.TextInput()
     ad_type = forms.ChoiceField(choices=AD_TYPE_LIST)
 
