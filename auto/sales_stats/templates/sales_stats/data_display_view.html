@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="./generator/">Genereeri</a>
+    <table style="display:none">
+    <thead>
+    <td>Brand</td>
+    <td>Model</td>
+    <td>Sub-model</td>
+    <td>Model year</td>
+    <td>Mileage</td>
+    <td>Price</td>
+    <td>Date Sold</td>
+    </thead>
+    <tbody>
+    {% for object in dataset %}
+        <tr>
+        <td>{{ object.advert.brand }}</td>
+        <td>{{ object.advert.vehicle_model }}</td>
+        <td>{% if object.advert.vehicle_submodel %}{{ object.advert.vehicle_submodel }}{% else %}-{% endif %}</td>
+        <td>{{ object.advert.vehicle_model_year }}</td>
+        <td>{{ object.advert.mileage_km }}</td>
+        <td>{{ object.end_price }} €</td>
+        <td>{{ object.date }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    <h3>Total sold: {{ totalsold }}</h3>
+    <canvas id="myChart" width="100" height="20"></canvas>
+    <style>
+    canvas {
+    }
+    </style>
+<script>
+console.log("{{ numberofsale }}")
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+         lineTension: 0,
+        labels: {{ salelabels }},
+        datasets: [{
+            label: 'Amount sold',
+            data: {{ numberofsale }},
+            backgroundColor: [
+                'rgba(0, 73, 106, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(0, 73, 106, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

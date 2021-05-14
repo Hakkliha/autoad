@@ -24,6 +24,7 @@ from accounts.views import LoginView, RegisterView
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('autoad.urls')),
+                  path('statistics/', include('sales_stats.urls')),
                   # path('models/', include('vehicle_models.urls')),
                   url(r'^login/$', LoginView.as_view(), name='login'),
                   url(r'^register/$', RegisterView.as_view(), name='register'),

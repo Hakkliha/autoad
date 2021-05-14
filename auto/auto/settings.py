@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'autoad',
     'django_filters',
     'accounts',
-    'vehicle_models'
+
+    'vehicle_models',
+    'sales_stats'
 ]
 
 AUTH_USER_MODEL = 'accounts.User'

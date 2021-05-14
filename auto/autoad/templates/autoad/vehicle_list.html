@@ -15,17 +15,31 @@
             <div class="search-box">
                 <table>
                     <tr>
-                        <td>Vehicle make</td>
-                        <td> {{ filter.form.brand }}</td>
-                    </tr>
-                    <tr class="d-none">
-                        <td>{{ filter.form.vehicle_model }}</td>
+                        <div class="inputfield">
+                            <p>Vehicle manufacturer</p>
+                            <div>{{ filter.form.brand }}</div>
+                        </div>
+                        <hr>
                     </tr>
                     <tr>
-                        <td>Vehicle model</td>
-                        <td><select id="vehicle_model">
-                            <option>Choose a model</option>
-                        </select></td>
+                        <div class="inputfield">
+                            <label for="model_fi">Vehicle Model:</label>
+                            <select name="model_fi" id="model_fi">
+                                <option value="">----------</option>
+                            </select>
+                            <p class="d-none">{{ filter.form.model }}</p>
+                        </div>
+                        <hr>
+                    </tr>
+                    <tr id="submodel_field" class="d-none">
+                        <div class="inputfield">
+                            <label for="submodel_fi">Submodel:</label>
+                            <select name="submodel_fi" id="submodel_fi">
+                                <option value="">----------</option>
+                            </select>
+                            <p class="d-none">{{ filter.form.submodel }}</p>
+                        </div>
+                        <hr>
                     </tr>
                     <tr>
                         <td>Price range</td>
@@ -62,6 +76,28 @@
             </div>
 
         </form>
+        <p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()">Try It</button>
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+}
+</script>
         <div id="list_items">
             {% for instance in response %}
                 {% if instance.active %}
@@ -71,7 +107,9 @@
                                 <img context="{{ instance.pictures }}" id="ad_cover{{ forloop.counter }}"
                                      class="list_item_image">
                                 <div class="details_area">
-                                    <h3>{{ instance.brand }} {{ instance.vehicle_model }}
+                                    <h3>{{ instance.brand }}
+                                        {% if instance.vehicle_submodel %}{{ instance.vehicle_submodel }}{% else %}
+                                            {{ instance.vehicle_model }} {% endif %}
                                         {% if instance.vehicle_model_other %}
                                             {{ instance.vehicle_model_other }}{% endif %}
                                         {{ instance.vehicle_model_year }} </h3>
@@ -116,4 +154,134 @@
         </div>
     </div>
     <script src="{% static 'autoad/list_function.js' %}" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.js"></script>
+    <script>
+
+        let loc = window.location;
+        let brand_sel = $("#id_brand");
+        let model_sel = $("#model_fi");
+        let submodel_sel = $("#submodel_fi");
+        let buy_sell_toggle = $("#buy_sell_toggle");
+        let counter = true;
+
+        let wsStart = 'ws://';
+        if (loc.protocol === 'https:') {
+            wsStart = 'wss://';
+        }
+        let endpoint = wsStart + loc.host + loc.pathname;
+        let socket = new ReconnectingWebSocket(endpoint);
+        socket.onmessage = function (e) {
+            console.log("message", e);
+            let chatDataMsg = JSON.parse(e.data);
+            let keys_in_message = Object.keys(chatDataMsg);
+            console.log(keys_in_message)
+            if (keys_in_message.includes("mudelid")) {
+                console.log(chatDataMsg.mudelid)
+                let new_models = "";
+                for (let i = 0; i < chatDataMsg.mudelid.length; i++) {
+                    let muutuja = chatDataMsg.mudelid[i]
+                    let inside_html = '<option value="' + muutuja[0] + '">' + muutuja[1] + '</option>'
+                    new_models += inside_html
+                }
+
+                model_sel.html($.parseHTML(new_models));
+                let mdl_value = chatDataMsg.mudelid[0][0];
+                $("#id_model").val(mdl_value);
+                let finalData = {
+                    'model': mdl_value
+                };
+                console.log(finalData);
+                socket.send(JSON.stringify(finalData));
+            }
+            if (keys_in_message.includes('submudelid')) {
+                let new_submodels = "";
+                for (let i = 0; i < chatDataMsg.submudelid.length; i++) {
+                    let muutuja = chatDataMsg.submudelid[i];
+                    let inside_html = '<option value="' + muutuja[0] + '">' + muutuja[1] + '</option>'
+                    new_submodels += inside_html
+                }
+                if (chatDataMsg.submudelid.length >= 1) {
+                    $("#submodel_field").removeClass("d-none")
+                    submodel_sel.html($.parseHTML(new_submodels))
+                    $("#id_submodel").val(submodel_sel.val())
+                } else {
+                    $("#submodel_field").addClass("d-none")
+                }
+            }
+            if (counter) {
+                let finalData = {
+                    'text': chatDataMsg
+                };
+                console.log(finalData);
+                socket.send(JSON.stringify(finalData));
+                counter = false;
+            }
+        };
+        socket.onopen = function (e) {
+            console.log("open", e);
+            brand_sel.change(() => {
+                let brand_value = brand_sel.val();
+                if (brand_value !== "") {
+                    let finalData = {
+                        'brand': brand_value
+                    };
+                    console.log(finalData);
+                    socket.send(JSON.stringify(finalData));
+                } else {
+                    model_sel.html($.parseHTML('<option value="">----------</option>'))
+                    submodel_sel.html($.parseHTML('<option value="">----------</option>'))
+                }
+            });
+            model_sel.change(() => {
+                let model_value = model_sel.val();
+                $("#id_model").val(model_value)
+                let finalData = {
+                    'model': model_value
+                };
+                console.log(finalData);
+                socket.send(JSON.stringify(finalData));
+
+
+            });
+        };
+        socket.onerror = function (e) {
+            console.log("error", e);
+        };
+        socket.onclose = function (e) {
+            console.log("close", e);
+            counter = true
+        };
+        buy_sell_toggle.click(() => {
+            let element = buy_sell_toggle;
+            if (element.hasClass("sell-button")) {
+                element.removeClass("sell-button")
+                element.addClass("buy-button")
+                element.html("BUY")
+            } else {
+                element.removeClass("buy-button")
+                element.addClass("sell-button")
+                element.html("SELL")
+            }
+        });
+        submodel_sel.click(() => {
+            $("#id_submodel").val(submodel_sel.val())
+        });
+        submodel_sel.change(() => {
+            $("#id_submodel").val(submodel_sel.val())
+        });
+        buy_sell_toggle.click(function () {
+            if (buy_sell_toggle.hasClass("sell-button")) {
+                $("#id_ad_type").val("Sale")
+            } else {
+                $("#id_ad_type").val("Buy")
+            }
+        });
+        $(document).ready(() => {
+            if (buy_sell_toggle.hasClass("sell-button")) {
+                $("#id_buy_sell").val("SELL")
+            } else {
+                $("#id_buy_sell").val("BUY")
+            }
+        });
+    </script>
 {% endblock %}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{5c72f74d20, bootstrap, jquery, moment.js, reconnecting-websocket, tempusdominus-bootstrap-4}" />
+    <file url="file://$PROJECT_DIR$" libraries="{5c72f74d20, bootstrap, chart.js, jquery, moment.js, reconnecting-websocket, tempusdominus-bootstrap-4}" />
   </component>
 </project>

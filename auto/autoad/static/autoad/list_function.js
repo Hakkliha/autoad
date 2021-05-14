@@ -1,18 +1,4 @@
 $(document).ready(function () {
-    let brand = $("#id_brand").val().toUpperCase().replace(' ', '').replace('-', '_');
-    let list_name = [];
-    let content = "";
-    if ((brand !== '') && (brand !== 'OTHER')) {
-        list_name = eval(brand + '_MODEL_LIST')
-        for (let i = 0; i < list_name.length; i++) {
-            content += '<option value="' + list_name[i] + '">' + list_name[i] + '</option>'
-        }
-    } else {
-        content = '<option value="">---------</option>'
-    }
-    content = $.parseHTML(content);
-    $("#vehicle_model").html(content);
-    $("#id_vehicle_model").val('');
     for (let i = $(".price_price").length - 1; i >= 0; i--) {
         let price = $(".price_price > b:eq(" + i + ")").text();
         $(".price_price > b:eq(" + i + ")").text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "));
@@ -36,29 +22,4 @@ $(document).ready(function () {
     }
 
 
-});
-
-$("#id_brand").click(function () {
-    let brand = $("#id_brand").val().toUpperCase().replace(' ', '').replace('-', '_');
-    let list_name = [];
-    let content = "---------";
-    if ((brand !== '') && (brand !== 'OTHER')) {
-        list_name = eval(brand + '_MODEL_LIST')
-        for (let i = 0; i < list_name.length; i++) {
-            content += '<option value="' + list_name[i] + '">' + list_name[i] + '</option>'
-        }
-    }
-    content = $.parseHTML(content);
-    $("#vehicle_model").html(content);
-    $("#id_vehicle_model").val('');
-});
-
-
-$("#vehicle_model").click(function () {
-    let modelname = $("#vehicle_model").val();
-    if ((modelname === 'Any') || (modelname === '')) {
-        $("#id_vehicle_model").val('');
-    } else {
-        $("#id_vehicle_model").val(modelname);
-    }
 });

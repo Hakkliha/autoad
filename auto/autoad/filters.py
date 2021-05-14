@@ -20,15 +20,17 @@ class VehicleFilter(django_filters.FilterSet):
 
     mileage_km = django_filters.RangeFilter(label='Mileage')
 
+    active = django_filters.BooleanFilter()
+
     class Meta:
         model = Vehicle
-        fields = ('brand', 'vehicle_model',)
+        fields = ('brand', 'vehicle_model', 'vehicle_submodel')
 
         '''
 		fields = {
 			'brand': ['iexact'],  --------['icontains']
 			'vehicle_model': ['iexact'],
-		}
+		}                      
 		'''
 
     def filter_by_order(self, queryset, name, value):

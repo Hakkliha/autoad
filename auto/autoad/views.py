@@ -21,18 +21,18 @@ from vehicle_models.models import VehicleBrand, VehicleModel, VehicleSubModel
 from .filters import VehicleFilter
 from .forms import VehicleForm, ActiveVehicleForm
 from .models import Vehicle
-
+from .vehicledata import FIRST_NAMES_LIST, LAST_NAMES_LIST
+from accounts.models import User
 
 class ModelGenerationView(View):
     def get(self, request, *args, **kwargs):
-        existing_brands = []
+        VehicleBrand.objects.all().delete()
+        VehicleModel.objects.all().delete()
+        VehicleSubModel.objects.all().delete()
         with open('autoad\CSV\Modellist.csv', 'r', encoding='utf-8-sig') as csv_file:
             csv_reader = csv.reader(csv_file)
-            for i in VehicleBrand.objects.all():
-                existing_brands.append(i.brandName.lower())
-            existing_brands.sort()
             for line in csv_reader:
-                if (line[0] != '') and (line[0] != ';') and (line[0].lower() not in existing_brands):
+                if (line[0] != '') and (line[0] != ';'):
                     new_brand = VehicleBrand(brandName=line[0])
                     new_brand.save()
         with open('autoad\CSV\Modellist.csv', 'r', encoding='utf-8-sig') as csv_file:
@@ -63,11 +63,13 @@ class VehicleListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        f_quest = self.request.GET.copy()
+        f_quest['active'] = True
         filtered_qs = VehicleFilter(
-            self.request.GET, queryset=self.get_queryset())
+            f_quest, queryset=self.get_queryset())
         context['filter'] = filtered_qs
         paginator = Paginator(filtered_qs.qs, 10)
-        page = self.request.GET.get('page')
+        page = f_quest.get('page')
         try:
             context['response'] = paginator.page(page)
         except PageNotAnInteger:

@@ -56,7 +56,7 @@ class Vehicle(models.Model):
         validators=[MaxValueValidator(100000000)], blank=True)
     reduced_price = models.PositiveIntegerField(
         validators=[MaxValueValidator(100000000)], blank=True, null=True)
-    value_added_tax = models.BooleanField(blank=True)
+    value_added_tax = models.BooleanField(blank=True, default=False)
     new_used = models.CharField(
         max_length=60, blank=True, choices=NEW_USED_LIST)
     warranty_until = models.DateField(auto_now=False, blank=True, null=True)
@@ -80,13 +80,13 @@ class Vehicle(models.Model):
     cylinders = models.PositiveIntegerField(blank=True, default=1, null=True)
     fuel = models.CharField(max_length=60, blank=True, choices=FUEL_TYPE)
     fuel_tank_l = models.DecimalField(
-        max_digits=5, decimal_places=1, blank=True, default='', null=True)
+        max_digits=5, decimal_places=1, blank=True, default=0, null=True)
     fuel_usage_city = models.DecimalField(
-        max_digits=5, decimal_places=1, blank=True, default='', null=True)
+        max_digits=5, decimal_places=1, blank=True, default=0, null=True)
     fuel_usage_out = models.DecimalField(
-        max_digits=5, decimal_places=1, blank=True, default='', null=True)
+        max_digits=5, decimal_places=1, blank=True, default=0, null=True)
     fuel_usage_average = models.DecimalField(
-        max_digits=5, decimal_places=1, blank=True, default='', null=True)
+        max_digits=5, decimal_places=1, blank=True, default=0, null=True)
     mileage_km = models.PositiveIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(10000000)])
     transmission = models.CharField(
@@ -128,6 +128,7 @@ class Vehicle(models.Model):
     active = models.BooleanField(blank=True, default=True)
     user = models.ForeignKey(
         'accounts.User', on_delete=models.CASCADE, null=True)
+
 
     def get_absolute_url(self):
         return reverse("autoad:vehicle-detail", kwargs={'pk': self.id})
